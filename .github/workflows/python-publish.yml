@@ -17,11 +17,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          # 如果没有 requirements.txt 可以跳过
-
       - name: Run python script
         run: python py.py
         # 把 your_script.py 替换成你要执行的文件名
