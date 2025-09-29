@@ -1,0 +1,27 @@
+name: Run Python Script Hourly
+
+on:
+  schedule:
+    # 每小时运行一次
+    - cron: '0 * * * *'
+     workflow_dispatch: # 允许手动触发
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          # 如果没有 requirements.txt 可以跳过
+
+      - name: Run python script
+        run: python py.py
+        # 把 your_script.py 替换成你要执行的文件名
