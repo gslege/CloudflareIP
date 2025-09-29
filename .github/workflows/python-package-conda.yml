@@ -1,14 +1,9 @@
-name: Run cf.py hourly
+name: Run cf.py hourly (debug)
 
 on:
   schedule:
-    # 在每个整点运行一次（UTC）
     - cron: '0 * * * *'
-  workflow_dispatch: {} # 允许手动触发以便测试
-
-concurrency:
-  group: run-cf-py-hourly
-  cancel-in-progress: true
+  workflow_dispatch: {}
 
 jobs:
   run-hourly:
@@ -19,18 +14,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Debug workspace
+        run: |
+          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+          pwd
+          echo "List repository root:"
+          ls -la "$GITHUB_WORKSPACE"
+          echo "Recursive list (first 200 lines):"
+          ls -R "$GITHUB_WORKSPACE" | sed -n '1,200p'
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      - name: Install dependencies (if any)
+      - name: Run cf.py (if present)
         run: |
-          if [ -f requirements.txt ]; then
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+          if [ -f "$GITHUB_WORKSPACE/$PY_FILE" ]; then
+            echo "Found $PY_FILE at $GITHUB_WORKSPACE/$PY_FILE, running..."
+            python "$GITHUB_WORKSPACE/$PY_FILE"
+          else
+            echo "ERROR: $PY_FILE not found at $GITHUB_WORKSPACE. Check path and branch."
+            exit 2
           fi
-
-      - name: Run cf.py
-        run: |
-          python "$PY_FILE"
