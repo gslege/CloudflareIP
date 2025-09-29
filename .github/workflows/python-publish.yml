@@ -1,48 +1,27 @@
-name: Update IP List
+name: Run Python Script Hourly
 
 on:
   schedule:
-    - cron: '0 */1 * * *' # 每3小时运行一次
-  workflow_dispatch: # 允许手动触发
+    # 每小时运行一次
+    - cron: '0 * * * *'
 
 jobs:
-
-  update-ip-list:
+  run-python:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v3
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
-        pip install beautifulsoup4
-        
-    - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@v2
-      with:
-        token: ${{ github.token }}
-        repository: ${{ github.repository }}
-        retain_days: 2
-        keep_minimum_runs: 6
-        
-    - name: Run script
-      run: python /${{ github.workspace }}/cf.py
-        
-    - name: Commit and push changes
-      run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Action"
-        if [ -n "$(git status --porcelain)" ]; then
-          git add ip.txt
-          git commit -m "Automatic update"
-          git push
-        else
-          echo "No changes detected, skipping commit."
-        fi
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          # 如果没有 requirements.txt 可以跳过
+
+      - name: Run python script
+        run: python cf.py
+        # 把 cf.py 替换成你要执行的文件名
