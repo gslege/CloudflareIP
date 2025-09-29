@@ -18,5 +18,4 @@ jobs:
           python-version: '3.x'
 
       - name: Run python script
-        run: python ${{ github.workspace }}/py.py
-        # 把 your_script.py 替换成你要执行的文件名
+        run: python py.py
