@@ -33,7 +33,7 @@ jobs:
         keep_minimum_runs: 6
         
     - name: Run script
-      run: python ${{ github.workspace }}/cf.py
+      run: python /${{ github.workspace }}/cf.py
         
     - name: Commit and push changes
       run: |
