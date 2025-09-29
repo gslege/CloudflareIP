@@ -1,0 +1,36 @@
+name: Run cf.py hourly
+
+on:
+  schedule:
+    # 在每个整点运行一次（UTC）
+    - cron: '0 * * * *'
+  workflow_dispatch: {} # 允许手动触发以便测试
+
+concurrency:
+  group: run-cf-py-hourly
+  cancel-in-progress: true
+
+jobs:
+  run-hourly:
+    runs-on: ubuntu-latest
+    env:
+      PY_FILE: cf.py
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (if any)
+        run: |
+          if [ -f requirements.txt ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+          fi
+
+      - name: Run cf.py
+        run: |
+          python "$PY_FILE"
