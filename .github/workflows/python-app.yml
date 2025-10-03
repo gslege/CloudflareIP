@@ -1,0 +1,29 @@
+name: Run Python Script
+
+on:
+  push:               # 每次 push 时运行
+    branches: [ "main" ]
+  workflow_dispatch:  # 允许手动运行
+  schedule:           # 定时运行（UTC 时间）
+    - cron: "0 0 * * *"   # 每天 0 点运行
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run script
+      run: |
+        python CF.py
