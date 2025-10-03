@@ -3,7 +3,7 @@ name: Run Python and Commit Result
 on:
   push:              # 每次 push 时触发
   schedule:
-    - cron: "0 0 * * *"   # 每天 0 点自动运行（UTC 时间）
+   - cron: '0 */1 * * *' # 每3小时运行一次
 
 jobs:
   run-script:
