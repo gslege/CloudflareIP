@@ -27,9 +27,3 @@ jobs:
     - name: Run script
       run: |
         python CF.py
-
-    - name: Upload result.txt
-      uses: actions/upload-artifact@v3
-      with:
-        name: result-file        # 上传后的名字
-        path: result.txt         # 你生成的文件路径
