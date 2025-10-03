@@ -1,92 +1,156 @@
-import re
-import sys
-import time
 import socket
+import re
+import time
 import threading
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from ipaddress import ip_address, ip_network
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
+from queue import Queue
 from datetime import datetime
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
+# Cloudflare节点测试配置参数
+TEST_TIMEOUT = 3  # 测试超时时间(秒)
+TEST_PORT = 443   # 测试端口
+MAX_THREADS = 30  # 最大线程数
+TOP_NODES = 30    # 显示和保存前N个最快节点
+TXT_OUTPUT_FILE = "IP.txt"    # TXT结果保存文件
 
-# -------------------- Config --------------------
-TEST_PORT = 443
-CONNECT_TIMEOUT_S = 1
-MAX_WORKERS = 100
-TOP_N = 100
-OUTPUT_TXT = "ip.txt"
+# 国家代码到中文国家名称的映射
+COUNTRY_CODES = {
+    'US': '美国',
+    'CN': '中国',
+    'JP': '日本',
+    'SG': '新加坡',
+    'KR': '韩国',
+    'GB': '英国',
+    'FR': '法国',
+    'DE': '德国',
+    'AU': '澳大利亚',
+    'CA': '加拿大',
+    'HK': '中国香港',
+    'TW': '中国台湾',
+    'IN': '印度',
+    'RU': '俄罗斯',
+    'BR': '巴西',
+    'MX': '墨西哥',
+    'NL': '荷兰',
+    'SE': '瑞典',
+    'CH': '瑞士',
+    'IT': '意大利',
+    'ES': '西班牙',
+    'Unknown': '未知'
+}
 
-
-# -------------------- Sources (from 2.py) --------------------
-URLS = [
-    "https://zip.cm.edu.kg/all.txt",
-    "https://raw.githubusercontent.com/gslege/cfipcaiji/refs/heads/main/ip.txt",
-    "https://ip.164746.xyz",
-    "https://www.wetest.vip/page/cloudflare/address_v4.html",
-    "https://api.uouin.com/cloudflare.html",
-    "https://raw.githubusercontent.com/xingpingcn/enhanced-FaaS-in-China/refs/heads/main/Cf.json",
-    "https://cf-ip.cdtools.click/beijing",
-    "https://cf-ip.cdtools.click/shanghai",
-    "https://cf-ip.cdtools.click/chengdu",
-    "https://cf-ip.cdtools.click/shenzhen",
-]
-
-
-def http_get(url: str, timeout: float = 15.0) -> str:
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; cf-ip-latency/1.0)"}
-    req = Request(url, headers=headers)
+# IP地理位置查询函数
+def get_ip_country(ip):
+    """获取IP地址对应的国家信息(返回中文)"""
     try:
-        with urlopen(req, timeout=timeout) as resp:
-            charset = resp.headers.get_content_charset() or "utf-8"
-            return resp.read().decode(charset, errors="replace")
-    except (HTTPError, URLError, TimeoutError, socket.timeout):
-        return ""
-
-
-def extract_ipv4s(text: str) -> set[str]:
-    if not text:
-        return set()
-    raw = re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", text)
-    ips: set[str] = set()
-    for candidate in raw:
+        # 验证IP格式
+        socket.inet_aton(ip)
+        
+        # 创建会话并配置重试机制
+        import requests
+        session = requests.Session()
+        retry = Retry(total=3, backoff_factor=0.3, status_forcelist=[500, 502, 503, 504])
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('http://', adapter)
+        session.mount('https://', adapter)
+        
+        # 尝试使用ipwhois.app API (不需要API密钥)
         try:
-            octets = [int(p) for p in candidate.split(".")]
-            if all(0 <= o <= 255 for o in octets):
-                ips.add(candidate)
-        except ValueError:
-            continue
-    return ips
-
-
-def load_cf_ipv4_networks() -> list[ip_network]:
-    data = http_get("https://www.cloudflare.com/ips-v4")
-    networks: list[ip_network] = []
-    for line in data.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
+            url = f"https://ipwhois.app/json/{ip}"
+            response = session.get(url, timeout=15)
+            if response.status_code == 200:
+                data = response.json()
+                if 'country' in data and data['country']:
+                    country = data['country']
+                    # 转换国家名称为中文
+                    if country == 'United States':
+                        return '美国'
+                    elif country == 'China':
+                        return '中国'
+                    elif country == 'Japan':
+                        return '日本'
+                    elif country == 'Singapore':
+                        return '新加坡'
+                    elif country == 'South Korea':
+                        return '韩国'
+                    elif country == 'United Kingdom':
+                        return '英国'
+                    elif country == 'France':
+                        return '法国'
+                    elif country == 'Germany':
+                        return '德国'
+                    elif country == 'Australia':
+                        return '澳大利亚'
+                    elif country == 'Canada':
+                        return '加拿大'
+                    elif country == 'Hong Kong':
+                        return '中国香港'
+                    elif country == 'Taiwan':
+                        return '中国台湾'
+                    # 如果是国家代码，尝试从映射中获取中文名称
+                    elif len(country) == 2:
+                        return COUNTRY_CODES.get(country, country)
+                    return country
+        except Exception as e:
+            print(f"ipwhois.app错误 {ip}: {str(e)}")
+        
+        # 尝试使用ip-api.com的备用端点 (使用HTTP而非HTTPS)
         try:
-            networks.append(ip_network(line))
-        except Exception:
-            continue
-    return networks
+            url = f"http://ip-api.com/json/{ip}?fields=countryCode"
+            response = session.get(url, timeout=15)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('status') == 'success' and 'countryCode' in data:
+                    country_code = data['countryCode']
+                    # 从映射中获取中文国家名称
+                    return COUNTRY_CODES.get(country_code, country_code)
+        except Exception as e:
+            print(f"ip-api.com错误 {ip}: {str(e)}")
+        
+        # 基于IP地址范围的简单判断 (Cloudflare IP范围)
+        # 这些IP看起来是Cloudflare的IP地址
+        octets = ip.split('.')
+        if octets[0] == '104' and octets[1] == '18':
+            return '美国'  # Cloudflare US IPs
+        elif octets[0] == '108' and octets[1] == '162':
+            return '美国'  # Cloudflare US IPs
+        elif octets[0] == '162' and octets[1] == '159':
+            return '美国'  # Cloudflare US IPs
+        elif octets[0] == '172' and octets[1] == '64':
+            return '美国'  # Cloudflare US IPs
+        
+        return '未知'
+    except Exception as e:
+        print(f"IP验证错误 {ip}: {str(e)}")
+        return '未知'
 
+def clean_ip(ip_str):
+    """清理IP字符串，移除可能的冒号或其他字符"""
+    # 移除末尾的冒号和空格
+    ip_str = ip_str.strip().rstrip(':')
+    # 验证是否为有效的IPv4地址
+    pattern = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
+    if re.match(pattern, ip_str):
+        # 进一步验证每个数字是否在0-255范围内
+        parts = ip_str.split('.')
+        if all(0 <= int(part) <= 255 for part in parts):
+            return ip_str
+    return None
 
-def is_in_cf_networks(ip_str: str, cf_networks: list[ip_network]) -> bool:
-    try:
-        ip_obj = ip_address(ip_str)
-    except Exception:
-        return False
-    for net in cf_networks:
-        if ip_obj in net:
-            return True
-    return False
+# Cloudflare节点测试类
+class CloudflareNodeTester:
+    def __init__(self):
+        self.nodes = set()  # 存储节点IP，使用set避免重复
+        self.results = []   # 存储测试结果
+        self.lock = threading.Lock()
+    
+    def fetch_known_nodes(self):
+        """从公开来源获取已知的Cloudflare节点IP"""
 
-
-# -------------------- Cloudflare IP seeds (from 1.py idea) --------------------
-def seed_cf_example_ips() -> set[str]:
-    ip_ranges = [
+        
+        # 常见的Cloudflare IP段
+        ip_ranges = [
 "172.64.229.0/22",
 "104.16.0.0/22",
 "104.17.0.0/22",
@@ -126,116 +190,230 @@ def seed_cf_example_ips() -> set[str]:
 "172.66.0.0/16",
 "172.67.0.0/16",
 "131.0.72.0/22"
-    ]
-
-    seeds: set[str] = set()
-    for cidr in ip_ranges:
-        base_ip, _ = cidr.split('/')
-        o = base_ip.split('.')
+        ]
+        
+        # 从IP段生成部分IP示例
+        for ip_range in ip_ranges:
+            base_ip, cidr = ip_range.split('/')
+            octets = base_ip.split('.')
+            
+            # 生成该网段的一些示例IP
+            for i in range(1, 10):  # 每个网段生成9个示例IP
+                ip = f"{octets[0]}.{octets[1]}.{octets[2]}.{i + int(octets[3])}"
+                self.nodes.add(ip)
+        
+    
+    def test_node_speed(self, ip):
+        """测试单个节点的连接速度"""
         try:
-            base_last = int(o[3])
-        except Exception:
-            continue
-        for i in range(1, 10):
-            ip_str = f"{o[0]}.{o[1]}.{o[2]}.{base_last + i}"
-            seeds.add(ip_str)
-    return seeds
-
-
-# -------------------- Latency --------------------
-def tcp_latency_ms(ip_str: str, port: int = TEST_PORT, timeout: float = CONNECT_TIMEOUT_S) -> float | None:
-    start = time.perf_counter()
-    try:
-        with socket.create_connection((ip_str, port), timeout=timeout):
-            pass
-        end = time.perf_counter()
-        return (end - start) * 1000.0
-    except Exception:
-        return None
-
-
-def main() -> int:
-    print("===== CloudFlare IP 延迟测试 =====")
-    # 1) Collect from remote URLs
-    per_url_ips: dict[str, set[str]] = {}
-    all_ips: set[str] = set()
-    for url in URLS:
-        text = http_get(url)
-        ips = extract_ipv4s(text)
-        per_url_ips[url] = ips
-        all_ips.update(ips)
-
-    # 2) Add seed IPs from CF ranges (sampled like 1.py)
-    seed_ips = seed_cf_example_ips()
-    all_ips.update(seed_ips)
-
-    print("每个网址提取到的IP数量：")
-    for url in URLS:
-        print(f"- {url}: {len(per_url_ips.get(url, set()))}")
-    print(f"CF官方IP数量: {len(seed_ips)}")
-    print(f"合并去重后总IP数量: {len(all_ips)}")
-
-    if not all_ips:
-        print("没有提取到任何IP，程序结束。")
-        return 1
-
-    # 3) Load CF networks to tag
-    cf_networks = load_cf_ipv4_networks()
-
-    # 4) Test latencies in parallel
-    ips_list = list(all_ips)
-    results: list[tuple[str, bool, float | None]] = []
-    max_workers = min(MAX_WORKERS, max(10, len(ips_list)))
-    print(f"开始并发测试: {len(ips_list)} 个IP，线程数 {max_workers}")
-    lock = threading.Lock()
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_ip = {executor.submit(tcp_latency_ms, ip): ip for ip in ips_list}
-        done = 0
-        for future in as_completed(future_to_ip):
-            ip = future_to_ip[future]
+            start_time = time.time()
+            # 创建socket连接
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(TEST_TIMEOUT)
+                result = s.connect_ex((ip, TEST_PORT))
+                if result == 0:  # 连接成功
+                    response_time = (time.time() - start_time) * 1000  # 转换为毫秒
+                    return {
+                        'ip': ip,
+                        'reachable': True,
+                        'response_time_ms': int(response_time),
+                        'timestamp': datetime.now().isoformat()
+                    }
+                else:
+                    return {
+                        'ip': ip,
+                        'reachable': False,
+                        'response_time_ms': None,
+                        'timestamp': datetime.now().isoformat()
+                    }
+        except Exception as e:
+            return {
+                'ip': ip,
+                'reachable': False,
+                'response_time_ms': None,
+                'error': str(e),
+                'timestamp': datetime.now().isoformat()
+            }
+    
+    def worker(self, queue):
+        """线程工作函数"""
+        while not queue.empty():
+            ip = queue.get()
             try:
-                latency = future.result()
-            except Exception:
-                latency = None
-            cf_tag = is_in_cf_networks(ip, cf_networks)
-            with lock:
-                results.append((ip, cf_tag, latency))
-                done += 1
-                if done % 100 == 0:
-                    print(f"已完成测试 {done}/{len(ips_list)}")
+                result = self.test_node_speed(ip)
+                with self.lock:
+                    self.results.append(result)
+                    # 每完成360个测试，打印进度
+                    if len(self.results) % 360 == 0:
+                        print(f"已测试 {len(self.results)}/{len(self.nodes)} 个")
+            finally:
+                queue.task_done()
+    
+    def test_all_nodes(self):
+        """测试所有节点的速度"""
 
-    # 5) Keep only reachable (with latency)
-    reachable = [(ip, cf_tag, latency) for (ip, cf_tag, latency) in results if latency is not None]
-    if not reachable:
-        print("没有可达的IP。")
-        return 2
+        
+        # 创建任务队列
+        queue = Queue()
+        for ip in self.nodes:
+            queue.put(ip)
+        
+        # 启动线程
+        threads = []
+        for _ in range(min(MAX_THREADS, len(self.nodes))):
+            thread = threading.Thread(target=self.worker, args=(queue,))
+            thread.start()
+            threads.append(thread)
+        
+        # 等待所有线程完成
+        for thread in threads:
+            thread.join()
+        
 
-    # 6) Sort by latency asc and keep TOP_N
-    reachable.sort(key=lambda x: x[2])
-    top_results = reachable[:TOP_N]
+    
+    def sort_and_display_results(self):
+        """排序并显示测试结果，包含中文国家信息"""
+        # 过滤出可连接的节点并按响应时间排序
+        reachable_nodes = [
+            node for node in self.results 
+            if node['reachable'] and node['response_time_ms'] is not None
+        ]
+        
+        # 按响应时间升序排序(最快的在前)
+        sorted_nodes = sorted(
+            reachable_nodes, 
+            key=lambda x: x['response_time_ms']
+        )
+        
+        
+        # 显示前N个最快节点，包含中文国家信息
+        for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
+            country = get_ip_country(node['ip'])
+            print(f"{node['ip']}  {country}  {node['response_time_ms']}ms")
+        
+        return sorted_nodes
+    
+    def save_results(self, results):
+        """只保存前30名结果到TXT文件，并显示中文国家信息"""
+        try:
+            # 只取前30名结果
+            top_results = results[:30]  # 明确只取前30名
+            
+            with open(TXT_OUTPUT_FILE, 'w', encoding='utf-8') as f:
+                # 清空文件并只写入前30个结果
+                for i, node in enumerate(top_results):
+                    # 获取IP的国家信息（已经是中文）
+                    country = get_ip_country(node['ip'])
+                    line = f"{node['ip']}:{TEST_PORT}{country} {node['response_time_ms']}ms\n"
+                    f.write(line)
+            
+            print(f"\n结果已保存到 {TXT_OUTPUT_FILE}（仅包含前{len(top_results)}名最快节点）")
+        except Exception as e:
+            print(f"保存结果失败: {e}")
 
-    # 7) Write one TXT file (format compatible with 1.py)
-    with open(OUTPUT_TXT, "w", encoding="utf-8") as f:
-        f.write(f"Cloudflare节点测速结果 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("=" * 10 + "\n")
-        f.write(f"合并源IP总数: {len(all_ips)}\n")
-        f.write(f"可达IP数: {len(reachable)}\n")
-        f.write(f"已保存前{len(top_results)}名最快节点\n")
-        f.write(f"测试端口: {TEST_PORT}\n")
-        f.write(f"超时时间: {CONNECT_TIMEOUT_S}s\n")
-        f.write("=" * 10 + "\n\n")
-        f.write("优选节点列表（按响应时间升序排序）：\n")
-        for ip, cf_tag, latency in top_results:
-            latency_str = f"{latency:.2f}ms"
-            f.write(f"{ip}:{TEST_PORT}#CF优选IP {latency_str}\n")
-        f.write("\n" + "=" * 10 + "\n")
-        f.write(f"测试完成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+# IP地理位置查询功能
+def batch_query_ip_countries():
+    """批量查询IP地址的国家信息(显示中文)"""
+    print("\n===== IP地址国家信息批量查询 =====")
+    
+    # 从cf_IP.txt文件读取IP地址列表
+    try:
+        with open(TXT_OUTPUT_FILE, 'r', encoding='utf-8') as f:
+            ip_list = []
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and not line.startswith('=') and ':' in line:
+                    # 从格式 "IP:端口#备注" 中提取IP
+                    ip = line.split(':')[0].strip()
+                    ip_list.append(ip)
+                elif line and not line.startswith('#') and not line.startswith('=') and ' ' not in line and '.' in line:
+                    # 纯IP地址行
+                    ip_list.append(line)
+        print(f"从文件读取了 {len(ip_list)} 个IP地址")
+    except Exception as e:
+        print(f"无法从文件读取IP: {str(e)}")
+        print("使用默认IP列表进行演示")
+        # 默认IP列表
+        ip_list = [
+            "108.162.192.3", "108.162.192.7", "108.162.192.4", "108.162.192.9",
+            "162.159.0.4", "162.159.0.1", "162.159.0.3", "108.162.192.2"
+        ]
+    
+    # 清理并验证IP地址列表
+    cleaned_ips = []
+    for ip in ip_list:
+        cleaned_ip = clean_ip(ip)
+        if cleaned_ip:
+            cleaned_ips.append(cleaned_ip)
+        else:
+            print(f"无效的IP地址: {ip}")
+    
+    print(f"清理后有效IP地址数量: {len(cleaned_ips)}")
+    
+    # 获取每个IP的国家信息（已经是中文）
+    results = []
+    for i, ip in enumerate(cleaned_ips):
+        print(f"正在查询 {i+1}/{len(cleaned_ips)}: {ip}")
+        country = get_ip_country(ip)
+        results.append(f"{ip} {country}")
+        
+        # 添加足够的延迟以避免API请求过于频繁
+        if i < len(cleaned_ips) - 1:
+            time.sleep(3)  # 增加延迟到3秒
+    
+    # 将结果写入文件
+    with open(IP_COUNTRIES_FILE, 'w', encoding='utf-8') as f:
+        for result in results:
+            f.write(result + '\n')
+    
+    print(f"\n查询完成！结果已保存到 {IP_COUNTRIES_FILE}")
+    print(f"处理的IP地址总数: {len(results)}")
+    
+    # 显示有国家信息的IP数量
+    successful_queries = sum(1 for r in results if not r.endswith(' 未知'))
+    print(f"获取到国家信息的IP数量: {successful_queries}")
+    print("===================================")
 
-    print(f"结果已写入: {OUTPUT_TXT}")
-    return 0
+# Cloudflare节点测试功能
+def test_cloudflare_nodes():
+    """运行Cloudflare节点测试"""
+    print("\n===== Cloudflare节点测速工具 =====")
+    tester = CloudflareNodeTester()
+    tester.run()
 
+# CloudflareNodeTester类的run方法
+def run_cloudflare_tester(self):
+    """运行整个测试流程"""
+    start_time = time.time()
+    
+    # 1. 获取节点
+    self.fetch_known_nodes()
+    
+    # 2. 测试所有节点
+    self.test_all_nodes()
+    
+    # 3. 排序并显示结果
+    sorted_nodes = self.sort_and_display_results()
+    
+    # 4. 保存结果
+    self.save_results(sorted_nodes)
+    
+    total_time = int(time.time() - start_time)
+    print(f"\n整个过程耗时: {total_time}秒")
 
+# 添加run方法到CloudflareNodeTester类
+CloudflareNodeTester.run = run_cloudflare_tester
+
+# 主函数 - 直接执行Cloudflare节点测试
 if __name__ == "__main__":
-    sys.exit(main())
 
-
+    try:
+        # 直接执行Cloudflare节点测试
+        tester = CloudflareNodeTester()
+        tester.run()
+        
+        print("\n测试完成！结果已保存到", TXT_OUTPUT_FILE)
+    except KeyboardInterrupt:
+        print("\n用户中断了程序")
+    except Exception as e:
+        print(f"程序出错: {e}")
