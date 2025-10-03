@@ -1,29 +1,34 @@
-name: Run Python Script
+name: Run Python and Commit Result
 
 on:
-  push:               # 每次 push 时运行
-    branches: [ "main" ]
-  workflow_dispatch:  # 允许手动运行
-  schedule:           # 定时运行（UTC 时间）
-    - cron: "0 0 * * *"   # 每天 0 点运行
+  push:              # 每次 push 时触发
+  schedule:
+    - cron: "0 0 * * *"   # 每天 0 点自动运行（UTC 时间）
 
 jobs:
-  run-python:
+  run-script:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
 
-    - name: Run script
-      run: |
-        python CF.py
+      - name: Run script and save output
+        run: |
+          python CF.py > result.txt
+
+      - name: Commit result
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add result.txt
+          git commit -m "Auto update result.txt [skip ci]" || echo "No changes to commit"
+          git push
