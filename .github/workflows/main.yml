@@ -1,0 +1,48 @@
+# .github/workflows/run_CP.yml
+name: 自动运行CP.py脚本
+
+# 触发条件：可根据需要修改（以下为常用配置）
+on:
+  # 1. 当代码推送到main分支时自动运行（包括新提交、合并PR到main）
+  push:
+    branches: [ "main" ]
+  # 2. 定时运行（可选，取消注释即可启用）
+  # schedule:
+  #   - cron: "0 8 * * *"  # 每天UTC时间8点运行（北京时间16点，cron格式：分 时 日 月 周）
+  # 3. 手动触发（始终保留，方便手动测试）
+  workflow_dispatch:
+
+# 工作任务
+jobs:
+  run-cp-script:
+    runs-on: ubuntu-latest  # 运行环境（选ubuntu最稳定，也可换windows-latest/macos-latest）
+    steps:
+      # 步骤1：拉取仓库代码到运行环境
+      - name: 拉取仓库代码
+        uses: actions/checkout@v4
+
+      # 步骤2：安装Python环境（根据CP.py需要的版本修改，如3.8/3.11等）
+      - name: 配置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"  # 推荐3.8+，根据你的代码兼容版本调整
+
+      # 步骤3：安装依赖（如果CP.py用到第三方库，必须配置）
+      - name: 安装Python依赖
+        run: |
+          python -m pip install --upgrade pip  # 升级pip
+          # 如果你有依赖文件，用下面这行（需在仓库根目录创建requirements.txt）
+          # pip install -r requirements.txt
+          # 如果你没有依赖文件，直接写需要的库，例如：
+          # pip install requests  # 示例：如果CP.py用到requests库
+
+      # 步骤4：运行CP.py
+      - name: 执行CP.py脚本
+        run: python CP.py  # 核心步骤：运行你的脚本
+
+      # 步骤5（可选）：如果CP.py生成了输出文件（如result.txt），保存结果
+      # - name: 保存运行结果
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: CP脚本输出结果
+      #     path: ./output  # 替换为你的输出文件路径（如result.txt或output文件夹）
