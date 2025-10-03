@@ -1,29 +1,92 @@
-import requests
-import socket
+import re
+import sys
 import time
+import socket
 import threading
-from queue import Queue
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from ipaddress import ip_address, ip_network
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 from datetime import datetime
 
-# 配置参数
-TEST_TIMEOUT = 3  # 测试超时时间(秒)
-TEST_PORT = 443   # 测试端口
-MAX_THREADS = 20  # 最大线程数
-TOP_NODES = 30    # 显示和保存前N个最快节点
-TXT_OUTPUT_FILE = "CF_IP.txt"    # TXT结果保存文件
 
-class CloudflareNodeTester:
-    def __init__(self):
-        self.nodes = set()  # 存储节点IP，使用set避免重复
-        self.results = []   # 存储测试结果
-        self.lock = threading.Lock()
-    
-    def fetch_known_nodes(self):
-        """从公开来源获取已知的Cloudflare节点IP"""
-        print("正在从公开来源获取Cloudflare节点...")
-        
-        # 常见的Cloudflare IP段
-        ip_ranges = [
+# -------------------- Config --------------------
+TEST_PORT = 443
+CONNECT_TIMEOUT_S = 1
+MAX_WORKERS = 100
+TOP_N = 100
+OUTPUT_TXT = "ip.txt"
+
+
+# -------------------- Sources (from 2.py) --------------------
+URLS = [
+    "https://zip.cm.edu.kg/all.txt",
+    "https://raw.githubusercontent.com/gslege/cfipcaiji/refs/heads/main/ip.txt",
+    "https://ip.164746.xyz",
+    "https://www.wetest.vip/page/cloudflare/address_v4.html",
+    "https://api.uouin.com/cloudflare.html",
+    "https://raw.githubusercontent.com/xingpingcn/enhanced-FaaS-in-China/refs/heads/main/Cf.json",
+    "https://cf-ip.cdtools.click/beijing",
+    "https://cf-ip.cdtools.click/shanghai",
+    "https://cf-ip.cdtools.click/chengdu",
+    "https://cf-ip.cdtools.click/shenzhen",
+]
+
+
+def http_get(url: str, timeout: float = 15.0) -> str:
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; cf-ip-latency/1.0)"}
+    req = Request(url, headers=headers)
+    try:
+        with urlopen(req, timeout=timeout) as resp:
+            charset = resp.headers.get_content_charset() or "utf-8"
+            return resp.read().decode(charset, errors="replace")
+    except (HTTPError, URLError, TimeoutError, socket.timeout):
+        return ""
+
+
+def extract_ipv4s(text: str) -> set[str]:
+    if not text:
+        return set()
+    raw = re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", text)
+    ips: set[str] = set()
+    for candidate in raw:
+        try:
+            octets = [int(p) for p in candidate.split(".")]
+            if all(0 <= o <= 255 for o in octets):
+                ips.add(candidate)
+        except ValueError:
+            continue
+    return ips
+
+
+def load_cf_ipv4_networks() -> list[ip_network]:
+    data = http_get("https://www.cloudflare.com/ips-v4")
+    networks: list[ip_network] = []
+    for line in data.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        try:
+            networks.append(ip_network(line))
+        except Exception:
+            continue
+    return networks
+
+
+def is_in_cf_networks(ip_str: str, cf_networks: list[ip_network]) -> bool:
+    try:
+        ip_obj = ip_address(ip_str)
+    except Exception:
+        return False
+    for net in cf_networks:
+        if ip_obj in net:
+            return True
+    return False
+
+
+# -------------------- Cloudflare IP seeds (from 1.py idea) --------------------
+def seed_cf_example_ips() -> set[str]:
+    ip_ranges = [
 "172.64.229.0/22",
 "104.16.0.0/22",
 "104.17.0.0/22",
@@ -63,167 +126,116 @@ class CloudflareNodeTester:
 "172.66.0.0/16",
 "172.67.0.0/16",
 "131.0.72.0/22"
-        ]
-        
-        # 从IP段生成部分IP示例
-        for ip_range in ip_ranges:
-            base_ip, cidr = ip_range.split('/')
-            octets = base_ip.split('.')
-            
-            # 生成该网段的一些示例IP
-            for i in range(1, 10):  # 每个网段生成9个示例IP
-                ip = f"{octets[0]}.{octets[1]}.{octets[2]}.{i + int(octets[3])}"
-                self.nodes.add(ip)
-        
-        print(f"共收集到 {len(self.nodes)} 个Cloudflare节点IP")
-    
-    def test_node_speed(self, ip):
-        """测试单个节点的连接速度"""
+    ]
+
+    seeds: set[str] = set()
+    for cidr in ip_ranges:
+        base_ip, _ = cidr.split('/')
+        o = base_ip.split('.')
         try:
-            start_time = time.time()
-            # 创建socket连接
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.settimeout(TEST_TIMEOUT)
-                result = s.connect_ex((ip, TEST_PORT))
-                if result == 0:  # 连接成功
-                    response_time = (time.time() - start_time) * 1000  # 转换为毫秒
-                    return {
-                        'ip': ip,
-                        'reachable': True,
-                        'response_time_ms': round(response_time, 2),
-                        'timestamp': datetime.now().isoformat()
-                    }
-                else:
-                    return {
-                        'ip': ip,
-                        'reachable': False,
-                        'response_time_ms': None,
-                        'timestamp': datetime.now().isoformat()
-                    }
-        except Exception as e:
-            return {
-                'ip': ip,
-                'reachable': False,
-                'response_time_ms': None,
-                'error': str(e),
-                'timestamp': datetime.now().isoformat()
-            }
-    
-    def worker(self, queue):
-        """线程工作函数"""
-        while not queue.empty():
-            ip = queue.get()
+            base_last = int(o[3])
+        except Exception:
+            continue
+        for i in range(1, 10):
+            ip_str = f"{o[0]}.{o[1]}.{o[2]}.{base_last + i}"
+            seeds.add(ip_str)
+    return seeds
+
+
+# -------------------- Latency --------------------
+def tcp_latency_ms(ip_str: str, port: int = TEST_PORT, timeout: float = CONNECT_TIMEOUT_S) -> float | None:
+    start = time.perf_counter()
+    try:
+        with socket.create_connection((ip_str, port), timeout=timeout):
+            pass
+        end = time.perf_counter()
+        return (end - start) * 1000.0
+    except Exception:
+        return None
+
+
+def main() -> int:
+    print("===== CloudFlare IP 延迟测试 =====")
+    # 1) Collect from remote URLs
+    per_url_ips: dict[str, set[str]] = {}
+    all_ips: set[str] = set()
+    for url in URLS:
+        text = http_get(url)
+        ips = extract_ipv4s(text)
+        per_url_ips[url] = ips
+        all_ips.update(ips)
+
+    # 2) Add seed IPs from CF ranges (sampled like 1.py)
+    seed_ips = seed_cf_example_ips()
+    all_ips.update(seed_ips)
+
+    print("每个网址提取到的IP数量：")
+    for url in URLS:
+        print(f"- {url}: {len(per_url_ips.get(url, set()))}")
+    print(f"CF官方IP数量: {len(seed_ips)}")
+    print(f"合并去重后总IP数量: {len(all_ips)}")
+
+    if not all_ips:
+        print("没有提取到任何IP，程序结束。")
+        return 1
+
+    # 3) Load CF networks to tag
+    cf_networks = load_cf_ipv4_networks()
+
+    # 4) Test latencies in parallel
+    ips_list = list(all_ips)
+    results: list[tuple[str, bool, float | None]] = []
+    max_workers = min(MAX_WORKERS, max(10, len(ips_list)))
+    print(f"开始并发测试: {len(ips_list)} 个IP，线程数 {max_workers}")
+    lock = threading.Lock()
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_ip = {executor.submit(tcp_latency_ms, ip): ip for ip in ips_list}
+        done = 0
+        for future in as_completed(future_to_ip):
+            ip = future_to_ip[future]
             try:
-                result = self.test_node_speed(ip)
-                with self.lock:
-                    self.results.append(result)
-                    # 每完成10个测试，打印进度
-                    if len(self.results) % 10 == 0:
-                        print(f"已测试 {len(self.results)}/{len(self.nodes)} 个节点...")
-            finally:
-                queue.task_done()
-    
-    def test_all_nodes(self):
-        """测试所有节点的速度"""
-        print(f"开始测试 {len(self.nodes)} 个节点，使用 {MAX_THREADS} 个线程...")
-        
-        # 创建任务队列
-        queue = Queue()
-        for ip in self.nodes:
-            queue.put(ip)
-        
-        # 启动线程
-        threads = []
-        for _ in range(min(MAX_THREADS, len(self.nodes))):
-            thread = threading.Thread(target=self.worker, args=(queue,))
-            thread.start()
-            threads.append(thread)
-        
-        # 等待所有线程完成
-        for thread in threads:
-            thread.join()
-        
-        print(f"测试完成，共测试 {len(self.results)} 个节点")
-    
-    def sort_and_display_results(self):
-        """排序并显示测试结果"""
-        # 过滤出可连接的节点并按响应时间排序
-        reachable_nodes = [
-            node for node in self.results 
-            if node['reachable'] and node['response_time_ms'] is not None
-        ]
-        
-        # 按响应时间升序排序(最快的在前)
-        sorted_nodes = sorted(
-            reachable_nodes, 
-            key=lambda x: x['response_time_ms']
-        )
-        
-        print("\n" + "="*50)
-        print(f"测试结果: 共 {len(reachable_nodes)}/{len(self.nodes)} 个节点可连接")
-        print(f"显示前 {min(TOP_NODES, len(sorted_nodes))} 个最快节点:")
-        print("="*50)
-        
-        # 显示前N个最快节点
-        for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
-            print(f"{i}. IP: {node['ip']}  响应时间: {node['response_time_ms']}ms")
-        
-        return sorted_nodes
-    
-    def save_results(self, results):
-        """只保存前30名结果到TXT文件"""
-        try:
-            # 只取前30名结果
-            top_results = results[:TOP_NODES]
-            
-            with open(TXT_OUTPUT_FILE, 'w', encoding='utf-8') as f:
-                f.write(f"Cloudflare节点测速结果 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                f.write("="*60 + "\n")
-                f.write(f"测试节点总数: {len(self.nodes)}\n")
-                f.write(f"可连接节点数: {len(results)}\n")
-                f.write(f"已保存前{len(top_results)}名最快节点\n")
-                f.write(f"测试端口: {TEST_PORT}\n")
-                f.write(f"超时时间: {TEST_TIMEOUT}秒\n")
-                f.write("="*60 + "\n\n")
-                
-                f.write("优选节点列表（按响应时间升序排序）:\n")
-                for node in top_results:  # 只使用前30名结果
-                    line = f"{node['ip']}:{TEST_PORT}#cf_优选_ip {node['response_time_ms']}ms\n"
-                    f.write(line)
-                
-                f.write("\n" + "="*60 + "\n")
-                f.write(f"测试完成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            
-            print(f"\n结果已保存到 {TXT_OUTPUT_FILE}（仅包含前{len(top_results)}名最快节点）")
-        except Exception as e:
-            print(f"保存结果失败: {e}")
-    
-    def run(self):
-        """运行整个测试流程"""
-        start_time = time.time()
-        print("===== Cloudflare节点测速工具 =====")
-        
-        # 1. 获取节点
-        self.fetch_known_nodes()
-        
-        # 2. 测试所有节点
-        self.test_all_nodes()
-        
-        # 3. 排序并显示结果
-        sorted_nodes = self.sort_and_display_results()
-        
-        # 4. 保存结果
-        self.save_results(sorted_nodes)
-        
-        total_time = round(time.time() - start_time, 2)
-        print(f"\n整个过程耗时: {total_time}秒")
-        print("===================================")
+                latency = future.result()
+            except Exception:
+                latency = None
+            cf_tag = is_in_cf_networks(ip, cf_networks)
+            with lock:
+                results.append((ip, cf_tag, latency))
+                done += 1
+                if done % 100 == 0:
+                    print(f"已完成测试 {done}/{len(ips_list)}")
+
+    # 5) Keep only reachable (with latency)
+    reachable = [(ip, cf_tag, latency) for (ip, cf_tag, latency) in results if latency is not None]
+    if not reachable:
+        print("没有可达的IP。")
+        return 2
+
+    # 6) Sort by latency asc and keep TOP_N
+    reachable.sort(key=lambda x: x[2])
+    top_results = reachable[:TOP_N]
+
+    # 7) Write one TXT file (format compatible with 1.py)
+    with open(OUTPUT_TXT, "w", encoding="utf-8") as f:
+        f.write(f"Cloudflare节点测速结果 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("=" * 10 + "\n")
+        f.write(f"合并源IP总数: {len(all_ips)}\n")
+        f.write(f"可达IP数: {len(reachable)}\n")
+        f.write(f"已保存前{len(top_results)}名最快节点\n")
+        f.write(f"测试端口: {TEST_PORT}\n")
+        f.write(f"超时时间: {CONNECT_TIMEOUT_S}s\n")
+        f.write("=" * 10 + "\n\n")
+        f.write("优选节点列表（按响应时间升序排序）：\n")
+        for ip, cf_tag, latency in top_results:
+            latency_str = f"{latency:.2f}ms"
+            f.write(f"{ip}:{TEST_PORT}#CF优选IP {latency_str}\n")
+        f.write("\n" + "=" * 10 + "\n")
+        f.write(f"测试完成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
+    print(f"结果已写入: {OUTPUT_TXT}")
+    return 0
+
 
 if __name__ == "__main__":
-    try:
-        tester = CloudflareNodeTester()
-        tester.run()
-    except KeyboardInterrupt:
-        print("\n用户中断了程序")
-    except Exception as e:
-        print(f"程序出错: {e}")
+    sys.exit(main())
+
+
