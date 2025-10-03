@@ -307,7 +307,6 @@ class CloudflareNodeTester:
                     line = f"{node['ip']}:{TEST_PORT}{country} {node['response_time_ms']}ms\n"
                     f.write(line)
             
-            print(f"\n结果已保存到 {TXT_OUTPUT_FILE}（仅包含前{len(top_results)}名最快节点）")
         except Exception as e:
             print(f"保存结果失败: {e}")
 
@@ -399,7 +398,6 @@ def run_cloudflare_tester(self):
     self.save_results(sorted_nodes)
     
     total_time = int(time.time() - start_time)
-    print(f"\n整个过程耗时: {total_time}秒")
 
 # 添加run方法到CloudflareNodeTester类
 CloudflareNodeTester.run = run_cloudflare_tester
@@ -412,8 +410,8 @@ if __name__ == "__main__":
         tester = CloudflareNodeTester()
         tester.run()
         
-        print("\n测试完成！结果已保存到", TXT_OUTPUT_FILE)
     except KeyboardInterrupt:
         print("\n用户中断了程序")
     except Exception as e:
         print(f"程序出错: {e}")
+
