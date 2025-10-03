@@ -1,4 +1,7 @@
 name: Run Python Script
+- name: Install dependencies
+  run: |
+    pip install requests
 
 on:
   push:            # 每次 push 到仓库时运行
