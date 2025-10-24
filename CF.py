@@ -289,7 +289,7 @@ class CloudflareNodeTester:
         # 显示前N个最快节点，包含中文国家信息
         for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
             country = get_ip_country(node['ip'])
-            print(f"{node['ip']}cloudflare优选节点 {node['response_time_ms']}ms")
+            print(f"{node['ip']}#cloudflare优选节点 {node['response_time_ms']}ms")
         
         return sorted_nodes
     
@@ -304,7 +304,7 @@ class CloudflareNodeTester:
                 for i, node in enumerate(top_results):
                     # 获取IP的国家信息（已经是中文）
                     country = get_ip_country(node['ip'])
-                    line = f"{node['ip']}cloudflare优选节点 {node['response_time_ms']}ms\n"
+                    line = f"{node['ip']}#cloudflare优选节点 {node['response_time_ms']}ms\n"
                     f.write(line)
             
         except Exception as e:
@@ -414,6 +414,7 @@ if __name__ == "__main__":
         print("\n用户中断了程序")
     except Exception as e:
         print(f"程序出错: {e}")
+
 
 
 
