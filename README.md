@@ -3,11 +3,11 @@
 
 <b>科学上网订阅地址</b>：https://reurl.cc/7VZeQl
 
+新加坡优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt
+
 日本优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt
 
 美国优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt
-
-新加坡优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt
 
 香港优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/HK.txt
 
