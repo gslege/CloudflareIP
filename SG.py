@@ -253,7 +253,7 @@ class CloudflareNodeTester:
         # 显示前N个最快节点，包含中文国家信息
         for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
             country = get_ip_country(node['ip'])
-            print(f"{node['ip']}#sg 新加坡 SG {node['response_time_ms']}ms")
+            print(f"{node['ip']}#sg 新加坡 SG")
         
         return sorted_nodes
     
