@@ -9,5 +9,11 @@
 
 新加坡优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/SG.txt
 
+香港优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/HK.txt
+
+台湾优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/TW.txt
+
+韩国优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/KR.txt
+
 全部优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/result.txt
 
