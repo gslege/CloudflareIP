@@ -1,162 +1,162 @@
-104.25.0.8  美国  17ms
-104.20.0.7  美国  17ms
-172.64.229.4  美国  17ms
-104.17.0.4  美国  17ms
-104.27.0.9  美国  17ms
-104.19.0.2  美国  17ms
-104.20.0.6  美国  17ms
-108.162.192.1  美国  17ms
-188.114.96.9  美国  17ms
-104.27.0.4  美国  17ms
-172.64.230.3  美国  17ms
-104.19.0.7  美国  17ms
-104.17.0.3  美国  17ms
-104.25.0.7  美国  17ms
-104.21.0.2  美国  17ms
-104.21.0.7  美国  17ms
-104.27.0.7  美国  17ms
-162.159.0.7  美国  17ms
-108.162.192.7  美国  17ms
-188.114.96.8  美国  17ms
-188.114.96.5  美国  17ms
-108.162.192.8  美国  17ms
-162.159.0.1  美国  17ms
-104.18.0.7  美国  17ms
-162.159.0.9  美国  17ms
-104.16.0.2  美国  17ms
-172.66.0.5  美国  17ms
-172.65.0.8  美国  17ms
-172.64.229.5  美国  17ms
-104.26.0.5  美国  17ms
-162.159.0.8  美国  17ms
-172.66.0.9  美国  17ms
-104.26.0.4  美国  17ms
-104.26.0.8  美国  17ms
-104.18.0.1  美国  17ms
-104.16.0.5  美国  17ms
-188.114.96.4  美国  17ms
-172.64.230.9  美国  17ms
-188.114.96.7  美国  17ms
-172.66.0.1  美国  17ms
-108.162.192.3  美国  17ms
-104.26.0.9  美国  17ms
-104.17.0.1  美国  17ms
-104.20.0.8  美国  17ms
-104.20.0.3  美国  17ms
-104.16.0.8  美国  17ms
-172.64.229.9  美国  17ms
-162.159.0.5  美国  17ms
-104.20.0.1  美国  17ms
-104.19.0.4  美国  17ms
-104.16.0.7  美国  17ms
-104.21.0.5  美国  17ms
-172.65.0.9  美国  17ms
-104.27.0.3  美国  17ms
-108.162.192.5  美国  17ms
-104.25.0.3  美国  17ms
-104.18.0.9  美国  17ms
-172.65.0.4  美国  17ms
-172.64.230.4  美国  17ms
-188.114.96.6  美国  17ms
-172.64.229.8  美国  17ms
-104.19.0.8  美国  17ms
-104.19.0.9  美国  17ms
-104.18.0.6  美国  17ms
-104.21.0.9  美国  17ms
-172.66.0.4  美国  17ms
-172.66.0.2  美国  17ms
-104.20.0.9  美国  17ms
-104.18.0.5  美国  17ms
-104.24.0.3  美国  17ms
-108.162.192.9  美国  17ms
-104.17.0.2  美国  17ms
-172.66.0.3  美国  17ms
-104.20.0.5  美国  17ms
-162.159.0.2  美国  17ms
-172.66.0.8  美国  17ms
-104.21.0.8  美国  17ms
-104.21.0.6  美国  17ms
-104.24.0.8  美国  17ms
-162.159.0.6  美国  17ms
-104.19.0.6  美国  17ms
-104.20.0.2  美国  17ms
-104.24.0.2  美国  17ms
-104.20.0.4  美国  17ms
-104.18.0.2  美国  17ms
-172.64.229.1  美国  17ms
-172.65.0.5  美国  17ms
-172.64.230.7  美国  17ms
-172.65.0.2  美国  17ms
-104.16.0.1  美国  17ms
-104.27.0.8  美国  17ms
-104.24.0.5  美国  17ms
-104.24.0.7  美国  17ms
-104.21.0.3  美国  17ms
-162.159.0.3  美国  17ms
-172.64.230.1  美国  17ms
-104.26.0.1  美国  17ms
-104.21.0.1  美国  17ms
-104.27.0.2  美国  17ms
-104.24.0.6  美国  17ms
-104.16.0.6  美国  17ms
-104.27.0.1  美国  17ms
-172.64.229.3  美国  17ms
-108.162.192.4  美国  17ms
-172.64.229.2  美国  17ms
-172.64.229.6  美国  17ms
-104.26.0.7  美国  17ms
-172.64.230.5  美国  17ms
-172.66.0.7  美国  17ms
-172.64.230.2  美国  17ms
-162.159.0.4  美国  17ms
-104.19.0.5  美国  17ms
-104.24.0.1  美国  17ms
-104.25.0.2  美国  17ms
-104.17.0.6  美国  17ms
-104.25.0.4  美国  17ms
-104.25.0.9  美国  17ms
-104.27.0.5  美国  17ms
-104.18.0.4  美国  17ms
-104.24.0.4  美国  17ms
-172.65.0.7  美国  17ms
-104.21.0.4  美国  17ms
-104.17.0.5  美国  17ms
-108.162.192.6  美国  17ms
-104.18.0.8  美国  18ms
-188.114.96.3  美国  18ms
-104.26.0.2  美国  18ms
-188.114.96.1  美国  18ms
-104.16.0.3  美国  18ms
-172.64.230.6  美国  18ms
-104.17.0.7  美国  18ms
-172.65.0.6  美国  18ms
-172.64.229.7  美国  18ms
-104.25.0.1  美国  18ms
-104.25.0.6  美国  18ms
-172.65.0.3  美国  18ms
-104.16.0.4  美国  18ms
-104.27.0.6  美国  18ms
-104.16.0.9  美国  18ms
-104.19.0.1  美国  18ms
-104.24.0.9  美国  18ms
-188.114.96.2  美国  18ms
-104.18.0.3  美国  18ms
-104.19.0.3  美国  18ms
-172.65.0.1  美国  18ms
-104.17.0.9  美国  18ms
-104.17.0.8  美国  18ms
-104.25.0.5  美国  18ms
-172.64.230.8  美国  18ms
-172.66.0.6  美国  18ms
-108.162.192.2  美国  18ms
-104.26.0.3  美国  18ms
-104.26.0.6  美国  19ms
-103.31.4.3  美国  23ms
-103.31.4.8  美国  23ms
-103.31.4.1  美国  23ms
-103.31.4.9  美国  23ms
-103.31.4.4  美国  23ms
-103.31.4.5  美国  23ms
-103.31.4.6  美国  23ms
-103.31.4.2  美国  23ms
-103.31.4.7  美国  24ms
+172.65.0.1cloudflare优选节点 1ms
+172.65.0.3cloudflare优选节点 1ms
+104.20.0.9cloudflare优选节点 1ms
+104.19.0.1cloudflare优选节点 1ms
+172.65.0.2cloudflare优选节点 1ms
+172.64.230.9cloudflare优选节点 1ms
+172.64.229.7cloudflare优选节点 1ms
+188.114.96.2cloudflare优选节点 1ms
+104.21.0.3cloudflare优选节点 1ms
+104.25.0.2cloudflare优选节点 1ms
+172.64.229.9cloudflare优选节点 1ms
+104.19.0.5cloudflare优选节点 1ms
+104.26.0.5cloudflare优选节点 1ms
+172.66.0.3cloudflare优选节点 1ms
+108.162.192.2cloudflare优选节点 1ms
+104.25.0.8cloudflare优选节点 1ms
+104.21.0.4cloudflare优选节点 1ms
+104.24.0.8cloudflare优选节点 1ms
+172.66.0.7cloudflare优选节点 1ms
+104.20.0.2cloudflare优选节点 1ms
+104.24.0.7cloudflare优选节点 1ms
+172.66.0.5cloudflare优选节点 1ms
+104.18.0.8cloudflare优选节点 1ms
+104.27.0.7cloudflare优选节点 1ms
+188.114.96.1cloudflare优选节点 1ms
+104.18.0.1cloudflare优选节点 1ms
+162.159.0.1cloudflare优选节点 1ms
+172.64.229.2cloudflare优选节点 1ms
+104.19.0.4cloudflare优选节点 1ms
+172.66.0.9cloudflare优选节点 1ms
+104.21.0.9cloudflare优选节点 1ms
+104.26.0.8cloudflare优选节点 1ms
+104.16.0.5cloudflare优选节点 1ms
+104.19.0.3cloudflare优选节点 1ms
+104.20.0.6cloudflare优选节点 1ms
+104.17.0.5cloudflare优选节点 1ms
+104.24.0.4cloudflare优选节点 1ms
+104.21.0.5cloudflare优选节点 1ms
+104.24.0.3cloudflare优选节点 1ms
+172.64.230.7cloudflare优选节点 1ms
+172.64.230.6cloudflare优选节点 1ms
+104.16.0.4cloudflare优选节点 1ms
+172.64.229.4cloudflare优选节点 1ms
+104.16.0.2cloudflare优选节点 1ms
+162.159.0.5cloudflare优选节点 1ms
+104.20.0.7cloudflare优选节点 1ms
+104.26.0.7cloudflare优选节点 1ms
+104.16.0.6cloudflare优选节点 1ms
+108.162.192.4cloudflare优选节点 1ms
+104.20.0.8cloudflare优选节点 1ms
+104.18.0.7cloudflare优选节点 1ms
+108.162.192.8cloudflare优选节点 1ms
+104.26.0.2cloudflare优选节点 1ms
+104.16.0.7cloudflare优选节点 1ms
+104.27.0.5cloudflare优选节点 1ms
+104.20.0.4cloudflare优选节点 1ms
+104.24.0.1cloudflare优选节点 1ms
+162.159.0.3cloudflare优选节点 1ms
+188.114.96.4cloudflare优选节点 1ms
+172.65.0.8cloudflare优选节点 1ms
+104.19.0.9cloudflare优选节点 1ms
+104.27.0.9cloudflare优选节点 1ms
+172.65.0.9cloudflare优选节点 1ms
+172.65.0.5cloudflare优选节点 1ms
+104.16.0.9cloudflare优选节点 1ms
+104.17.0.3cloudflare优选节点 1ms
+104.17.0.1cloudflare优选节点 1ms
+108.162.192.1cloudflare优选节点 1ms
+104.25.0.9cloudflare优选节点 1ms
+172.66.0.1cloudflare优选节点 1ms
+104.21.0.6cloudflare优选节点 1ms
+172.64.230.2cloudflare优选节点 1ms
+188.114.96.3cloudflare优选节点 1ms
+172.64.229.5cloudflare优选节点 1ms
+104.24.0.5cloudflare优选节点 1ms
+104.19.0.7cloudflare优选节点 1ms
+188.114.96.7cloudflare优选节点 1ms
+172.66.0.8cloudflare优选节点 1ms
+162.159.0.8cloudflare优选节点 1ms
+104.25.0.4cloudflare优选节点 1ms
+104.17.0.8cloudflare优选节点 1ms
+172.64.230.4cloudflare优选节点 1ms
+104.18.0.5cloudflare优选节点 1ms
+108.162.192.5cloudflare优选节点 1ms
+104.26.0.3cloudflare优选节点 1ms
+104.18.0.6cloudflare优选节点 1ms
+104.19.0.6cloudflare优选节点 1ms
+172.65.0.4cloudflare优选节点 1ms
+104.24.0.2cloudflare优选节点 1ms
+172.65.0.6cloudflare优选节点 1ms
+162.159.0.7cloudflare优选节点 1ms
+104.19.0.8cloudflare优选节点 1ms
+104.20.0.3cloudflare优选节点 1ms
+162.159.0.2cloudflare优选节点 1ms
+104.16.0.1cloudflare优选节点 1ms
+188.114.96.6cloudflare优选节点 1ms
+188.114.96.8cloudflare优选节点 1ms
+104.17.0.4cloudflare优选节点 1ms
+104.19.0.2cloudflare优选节点 1ms
+108.162.192.6cloudflare优选节点 1ms
+104.24.0.6cloudflare优选节点 1ms
+104.17.0.2cloudflare优选节点 1ms
+162.159.0.4cloudflare优选节点 1ms
+104.18.0.9cloudflare优选节点 1ms
+108.162.192.9cloudflare优选节点 1ms
+162.159.0.9cloudflare优选节点 1ms
+188.114.96.9cloudflare优选节点 1ms
+104.20.0.1cloudflare优选节点 1ms
+162.159.0.6cloudflare优选节点 1ms
+104.25.0.1cloudflare优选节点 1ms
+172.64.229.3cloudflare优选节点 1ms
+104.16.0.3cloudflare优选节点 1ms
+104.18.0.3cloudflare优选节点 1ms
+104.25.0.3cloudflare优选节点 1ms
+172.64.230.5cloudflare优选节点 1ms
+104.16.0.8cloudflare优选节点 1ms
+104.27.0.3cloudflare优选节点 1ms
+104.17.0.6cloudflare优选节点 1ms
+172.65.0.7cloudflare优选节点 1ms
+104.25.0.5cloudflare优选节点 1ms
+172.64.230.8cloudflare优选节点 1ms
+172.64.229.6cloudflare优选节点 1ms
+104.26.0.1cloudflare优选节点 1ms
+104.26.0.9cloudflare优选节点 1ms
+104.27.0.6cloudflare优选节点 1ms
+104.18.0.2cloudflare优选节点 2ms
+104.21.0.2cloudflare优选节点 2ms
+104.25.0.7cloudflare优选节点 2ms
+104.24.0.9cloudflare优选节点 2ms
+172.66.0.2cloudflare优选节点 2ms
+172.64.230.3cloudflare优选节点 2ms
+104.26.0.6cloudflare优选节点 2ms
+188.114.96.5cloudflare优选节点 2ms
+104.27.0.4cloudflare优选节点 2ms
+104.18.0.4cloudflare优选节点 2ms
+104.21.0.8cloudflare优选节点 2ms
+104.25.0.6cloudflare优选节点 2ms
+108.162.192.7cloudflare优选节点 2ms
+104.27.0.8cloudflare优选节点 2ms
+172.66.0.6cloudflare优选节点 2ms
+104.27.0.1cloudflare优选节点 2ms
+104.21.0.1cloudflare优选节点 2ms
+108.162.192.3cloudflare优选节点 2ms
+104.20.0.5cloudflare优选节点 2ms
+172.66.0.4cloudflare优选节点 2ms
+104.26.0.4cloudflare优选节点 2ms
+104.17.0.7cloudflare优选节点 2ms
+172.64.229.8cloudflare优选节点 2ms
+104.27.0.2cloudflare优选节点 2ms
+172.64.229.1cloudflare优选节点 2ms
+172.64.230.1cloudflare优选节点 5ms
+104.17.0.9cloudflare优选节点 6ms
+104.21.0.7cloudflare优选节点 7ms
+103.31.4.9cloudflare优选节点 46ms
+103.31.4.4cloudflare优选节点 46ms
+103.31.4.7cloudflare优选节点 46ms
+103.31.4.8cloudflare优选节点 46ms
+103.31.4.1cloudflare优选节点 47ms
+103.31.4.6cloudflare优选节点 49ms
+103.31.4.5cloudflare优选节点 49ms
+103.31.4.2cloudflare优选节点 49ms
+103.31.4.3cloudflare优选节点 49ms
