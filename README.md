@@ -1,1 +1,1 @@
-自动优选CF的IP
+自动优选CF的IP，包含美国US，日本JP，新加坡SG等cloudflare每天第小时自动优选IP。
