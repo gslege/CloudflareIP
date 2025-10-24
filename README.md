@@ -3,17 +3,17 @@
 
 <b>科学上网订阅地址</b>：https://reurl.cc/7VZeQl
 
-日本优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/JP.txt
+日本优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt
 
-美国优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/US.txt
+美国优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt
 
-新加坡优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/SG.txt
+新加坡优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt
 
-香港优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/HK.txt
+香港优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/HK.txt
 
-台湾优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/TW.txt
+台湾优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/TW.txt
 
-韩国优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/KR.txt
+韩国优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/KR.txt
 
-全部优选IP地址：https://raw.githubusercontent.com/gslege/cf_ip/refs/heads/main/result.txt
+全部优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/result.txt
 
