@@ -10,8 +10,8 @@ from urllib3.util.retry import Retry
 # Cloudflare节点测试配置参数
 TEST_TIMEOUT = 3  # 测试超时时间(秒)
 TEST_PORT = 443   # 测试端口
-MAX_THREADS = 30  # 最大线程数
-TOP_NODES = 300    # 显示和保存前N个最快节点
+MAX_THREADS = 3  # 最大线程数
+TOP_NODES = 10    # 显示和保存前N个最快节点
 TXT_OUTPUT_FILE = "JP.txt"    # TXT结果保存文件
 
 # 国家代码到中文国家名称的映射
@@ -266,7 +266,7 @@ class CloudflareNodeTester:
                 for i, node in enumerate(top_results):
                     # 获取IP的国家信息（已经是中文）
                     country = get_ip_country(node['ip'])
-                    line = f"{node['ip']}:{TEST_PORT}{country} {node['response_time_ms']}ms\n"
+                    line = f"{node['ip']}:{TEST_PORT}日本 {node['response_time_ms']}ms\n"
                     f.write(line)
             
         except Exception as e:
