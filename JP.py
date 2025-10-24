@@ -251,7 +251,7 @@ class CloudflareNodeTester:
         # 显示前N个最快节点，包含中文国家信息
         for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
             country = get_ip_country(node['ip'])
-            print(f"{node['ip']}  {country}  {node['response_time_ms']}ms")
+            print(f"{node['ip']}  JP  {node['response_time_ms']}ms")
         
         return sorted_nodes
     
@@ -259,14 +259,14 @@ class CloudflareNodeTester:
         """只保存前30名结果到TXT文件，并显示中文国家信息"""
         try:
             # 只取前30名结果
-            top_results = results[:300]  # 明确只取前30名
+            top_results = results[:10]  # 明确只取前30名
             
             with open(TXT_OUTPUT_FILE, 'w', encoding='utf-8') as f:
                 # 清空文件并只写入前30个结果
                 for i, node in enumerate(top_results):
                     # 获取IP的国家信息（已经是中文）
                     country = get_ip_country(node['ip'])
-                    line = f"{node['ip']}:{TEST_PORT}日本 {node['response_time_ms']}ms\n"
+                    line = f"{node['ip']}:{TEST_PORT}JP {node['response_time_ms']}ms\n"
                     f.write(line)
             
         except Exception as e:
