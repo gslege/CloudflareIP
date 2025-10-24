@@ -17,3 +17,4 @@
 
 全部优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/result.txt
 
+CloudFlare优选域名：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/domain.txt
