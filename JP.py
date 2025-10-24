@@ -11,7 +11,7 @@ from urllib3.util.retry import Retry
 TEST_TIMEOUT = 3  # 测试超时时间(秒)
 TEST_PORT = 443   # 测试端口
 MAX_THREADS = 3  # 最大线程数
-TOP_NODES = 100    # 显示和保存前N个最快节点
+TOP_NODES = 20    # 显示和保存前N个最快节点
 TXT_OUTPUT_FILE = "JP.txt"    # TXT结果保存文件
 
 # 国家代码到中文国家名称的映射
