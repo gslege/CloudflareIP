@@ -15,6 +15,10 @@
 
 韩国优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/KR.txt
 
+德国优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/DE.txt
+
+荷兰优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/NL.txt
+
 全部优选IP地址：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/result.txt
 
 CloudFlare优选域名：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/domain.txt
