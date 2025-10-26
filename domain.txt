@@ -1,80 +1,80 @@
-nrtcfdns.zone.id#[nrtcfdns.zone.id] 61ms
-cdns.doon.eu.org#[cdns.doon.eu.org] 62ms
-www.shopify.com#[www.shopify.com] 65ms
-tbt1.593920.xyz#[tbt1.593920.xyz] 68ms
-www.udacity.com#[www.udacity.com] 68ms
-nrt.xxxxxxxx.nyc.mn#[nrt.xxxxxxxx.nyc.mn] 68ms
-www.wto.org#[www.wto.org] 69ms
-download.yunzhongzhuan.com#[download.yunzhongzhuan.com] 70ms
-777.ai7777777.xyz#[777.ai7777777.xyz] 70ms
-123.cf.090227.xyz#[123.cf.090227.xyz] 70ms
-cf.877774.xyz#[cf.877774.xyz] 71ms
-saas.sin.fan#[saas.sin.fan] 71ms
-mfa.gov.ua#[mfa.gov.ua] 74ms
-youxuan.cf.090227.xyz#[youxuan.cf.090227.xyz] 74ms
-staticdelivery.nexusmods.com#[staticdelivery.nexusmods.com] 74ms
-store.ubi.com#[store.ubi.com] 74ms
-ct.877774.xyz#[ct.877774.xyz] 80ms
-ktff.tencentapp.cn#[ktff.tencentapp.cn] 158ms
-freeyx.cloudflare88.eu.org#[freeyx.cloudflare88.eu.org] 159ms
-www.visa.com.tw#[www.visa.com.tw] 160ms
-www.digitalocean.com#[www.digitalocean.com] 160ms
-cf.tencentapp.cn#[cf.tencentapp.cn] 161ms
-cmcc.877774.xyz#[cmcc.877774.xyz] 161ms
-www.visa.com#[www.visa.com] 161ms
-edtunnel-dgp.pages.dev#[edtunnel-dgp.pages.dev] 162ms
-www.glassdoor.com#[www.glassdoor.com] 163ms
-www.okcupid.com#[www.okcupid.com] 163ms
-www.visa.co.jp#[www.visa.co.jp] 164ms
-cfip.1323123.xyz#[cfip.1323123.xyz] 164ms
-shopify.com#[shopify.com] 165ms
-cloudflare-dl.byoip.top#[cloudflare-dl.byoip.top] 165ms
-www.visa.com.sg#[www.visa.com.sg] 166ms
-whatismyipaddress.com#[whatismyipaddress.com] 166ms
-www.visakorea.com#[www.visakorea.com] 166ms
-www.4chan.org#[www.4chan.org] 166ms
-bestcf.030101.xyz#[bestcf.030101.xyz] 166ms
-na.877774.xyz#[na.877774.xyz] 166ms
-cf-st.annoy.eu.org#[cf-st.annoy.eu.org] 168ms
-asia.877774.xyz#[asia.877774.xyz] 168ms
-www.udemy.com#[www.udemy.com] 168ms
-www.who.int#[www.who.int] 168ms
-fbi.gov#[fbi.gov] 169ms
-cdn.2020111.xyz#[cdn.2020111.xyz] 170ms
-www.pcmag.com#[www.pcmag.com] 171ms
-cf.zhetengsha.eu.org#[cf.zhetengsha.eu.org] 171ms
-gur.gov.ua#[gur.gov.ua] 171ms
-www.visa.com.hk#[www.visa.com.hk] 173ms
-emby2.misakaf.org#[emby2.misakaf.org] 173ms
-www.gov.se#[www.gov.se] 173ms
-www.zsu.gov.ua#[www.zsu.gov.ua] 176ms
-www.csgo.com#[www.csgo.com] 177ms
-cloudflare-ip.mofashi.ltd#[cloudflare-ip.mofashi.ltd] 178ms
-singapore.com#[singapore.com] 178ms
-ProxyIP.Vultr.CMLiussss.net#[ProxyIP.Vultr.CMLiussss.net] 179ms
-fn.130519.xyz#[fn.130519.xyz] 181ms
-www.iplocation.net#[www.iplocation.net] 181ms
-yx.887141.xyz#[yx.887141.xyz] 182ms
-www.ipchicken.com#[www.ipchicken.com] 182ms
-log.bpminecraft.com#[log.bpminecraft.com] 183ms
-palera.in#[palera.in] 185ms
-russia.com#[russia.com] 186ms
-www.d-555.com#[www.d-555.com] 187ms
-www.baipiao.eu.org#[www.baipiao.eu.org] 188ms
-www.gco.gov.qa#[www.gco.gov.qa] 188ms
-cf.0sm.com#[cf.0sm.com] 189ms
-time.is#[time.is] 189ms
-icook.tw#[icook.tw] 189ms
-www.hugedomains.com#[www.hugedomains.com] 189ms
-www.whatismyip.com#[www.whatismyip.com] 190ms
-www.whoer.net#[www.whoer.net] 190ms
-skk.moe#[skk.moe] 190ms
-xn--b6gac.eu.org#[xn--b6gac.eu.org] 190ms
-icook.hk#[icook.hk] 191ms
-cf.877771.xyz#[cf.877771.xyz] 192ms
-eur.877774.xyz#[eur.877774.xyz] 192ms
-cu.877774.xyz#[cu.877774.xyz] 195ms
-japan.com#[japan.com] 198ms
-www.ipget.net#[www.ipget.net] 198ms
-www.gov.ua#[www.gov.ua] 200ms
-ip.sb#[ip.sb] 200ms
+jp.byun.eu.org#jp.byun.eu.org
+cf.515188.xyz#cf.515188.xyz
+un.goasa.top#un.goasa.top
+emby2.misakaf.org#emby2.misakaf.org
+cfip.xxxxxxxx.tk#cfip.xxxxxxxx.tk
+cf-st.annoy.eu.org#cf-st.annoy.eu.org
+bestcf.onecf.eu.org#bestcf.onecf.eu.org
+cf.zhetengsha.eu.org#cf.zhetengsha.eu.org
+acjp2.cloudflarest.link#acjp2.cloudflarest.link
+achk.cloudflarest.link#achk.cloudflarest.link
+xn--b6gac.eu.org#xn--b6gac.eu.org
+yx.887141.xyz#yx.887141.xyz
+8.889288.xyz#8.889288.xyz
+cfip.1323123.xyz#cfip.1323123.xyz
+cf.0sm.com#cf.0sm.com
+cf.877771.xyz#cf.877771.xyz
+cf.345673.xyz#cf.345673.xyz
+shopify.com#shopify.com
+time.is#time.is
+icook.hk#icook.hk
+icook.tw#icook.tw
+ip.sb#ip.sb
+japan.com#japan.com
+malaysia.com#malaysia.com
+russia.com#russia.com
+singapore.com#singapore.com
+skk.moe#skk.moe
+www.visa.com#www.visa.com
+www.visa.com.sg#www.visa.com.sg
+www.visa.com.hk#www.visa.com.hk
+www.visa.com.tw#www.visa.com.tw
+www.visa.co.jp#www.visa.co.jp
+www.visakorea.com#www.visakorea.com
+www.gco.gov.qa#www.gco.gov.qa
+www.gov.se#www.gov.se
+www.gov.ua#www.gov.ua
+www.digitalocean.com#www.digitalocean.com
+www.csgo.com#www.csgo.com
+777.ai7777777.xyz#777.ai7777777.xyz
+www.shopify.com#www.shopify.com
+www.whoer.net#www.whoer.net
+www.whatismyip.com#www.whatismyip.com
+tencentapp.cn#tencentapp.cn
+nrtcfdns.zone.id#nrtcfdns.zone.id
+www.ipget.net#www.ipget.net
+nrt.xxxxxxxx.nyc.mn#nrt.xxxxxxxx.nyc.mn
+freeyx.cloudflare88.eu.org#freeyx.cloudflare88.eu.org
+www.hugedomains.com#www.hugedomains.com
+www.udacity.com#www.udacity.com
+fn.130519.xyz#fn.130519.xyz
+www.4chan.org#www.4chan.org
+cloudflare-ip.mofashi.ltd#cloudflare-ip.mofashi.ltd
+www.okcupid.com#www.okcupid.com
+www.glassdoor.com#www.glassdoor.com
+www.udemy.com#www.udemy.com
+cloudflare.182682.xyz#cloudflare.182682.xyz
+www.baipiao.eu.org#www.baipiao.eu.org
+cfip.cfcdn.vip#cfip.cfcdn.vip
+alejandracaiccedo.com#alejandracaiccedo.com
+cf.900501.xyz#cf.900501.xyz
+cdn.2020111.xyz#cdn.2020111.xyz
+log.bpminecraft.com#log.bpminecraft.com
+cf.cloudflare.182682.xyz#cf.cloudflare.182682.xyz
+www.boba88slot.com#www.boba88slot.com
+cf.tencentapp.cn#cf.tencentapp.cn
+gur.gov.ua#gur.gov.ua
+www.zsu.gov.ua#www.zsu.gov.ua
+www.iakeys.com#www.iakeys.com
+edtunnel-dgp.pages.dev#edtunnel-dgp.pages.dev
+123.cf.090227.xyz#123.cf.090227.xyz
+www.d-555.com#www.d-555.com
+tbt1.593920.xyz#tbt1.593920.xyz
+ProxyIP.Vultr.CMLiussss.net#ProxyIP.Vultr.CMLiussss.net
+fbi.gov#fbi.gov
+cloudflare-dl.byoip.top#cloudflare-dl.byoip.top
+saas.sin.fan#saas.sin.fan
+www.sean-now.com#www.sean-now.com
+yd.iori3.pp.ua#yd.iori3.pp.ua
+download.yunzhongzhuan.com#download.yunzhongzhuan.com
+whatismyipaddress.com#whatismyipaddress.com
