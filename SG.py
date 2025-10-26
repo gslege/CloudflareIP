@@ -268,7 +268,7 @@ class CloudflareNodeTester:
                 for i, node in enumerate(top_results):
                     # 获取IP的国家信息（已经是中文）
                     country = get_ip_country(node['ip'])
-                    line = f"{node['ip']}#sg 新加坡 SG {node['response_time_ms']}ms\n"
+                    line = f"{node['ip']}#sg 新加坡 SG\n"
                     f.write(line)
             
         except Exception as e:
