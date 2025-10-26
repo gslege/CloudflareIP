@@ -270,7 +270,7 @@ class CloudflareNodeTester:
                 for i, node in enumerate(top_results):
                     # 获取IP的国家信息（已经是中文）
                     country = get_ip_country(node['ip'])
-                    line = f"{node['ip']}#de 德国 DE {node['response_time_ms']}ms\n"
+                    line = f"{node['ip']}#de 德国 DE\n"
                     f.write(line)
             
         except Exception as e:
