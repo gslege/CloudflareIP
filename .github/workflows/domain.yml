@@ -23,12 +23,12 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python domain.py > dotest.txt
+          python domain.py > domain.txt
 
       - name: Commit result
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dotest.txt
-          git commit -m "Auto update dotest.txt [skip ci]" || echo "No changes to commit"
+          git add domain.txt
+          git commit -m "Auto update domain.txt [skip ci]" || echo "No changes to commit"
           git push
