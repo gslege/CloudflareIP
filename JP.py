@@ -259,7 +259,7 @@ class CloudflareNodeTester:
         """只保存前30名结果到TXT文件，并显示中文国家信息"""
         try:
             # 只取前30名结果
-            top_results = results[:10]  # 明确只取前30名
+            top_results = results[:20]  # 明确只取前30名
             
             with open(TXT_OUTPUT_FILE, 'w', encoding='utf-8') as f:
                 # 清空文件并只写入前30个结果
