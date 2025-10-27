@@ -193,7 +193,7 @@ def write_top20(results: List[Tuple[str, Optional[float]]], output_path: str = "
         results,
         key=lambda item: (1, float("inf")) if item[1] is None else (0, item[1])
     )
-    top20 = results_sorted[:50]
+    top20 = results_sorted[:25]
     lines = [build_vless_line(domain, ms) for domain, ms in top20]
     with open(output_path, "w", encoding="utf-8") as f:
         for line in lines:
@@ -207,7 +207,7 @@ async def main() -> None:
     printable = sorted(
         results,
         key=lambda item: (1, float("inf")) if item[1] is None else (0, item[1])
-    )[:50]
+    )[:25]
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
         print(f"{domain}#{domain}")
