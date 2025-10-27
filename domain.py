@@ -207,10 +207,10 @@ async def main() -> None:
     printable = sorted(
         results,
         key=lambda item: (1, float("inf")) if item[1] is None else (0, item[1])
-    )[:20]
+    )[:50]
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
-        print(f"{domain:35}#{domain:35}")
+        print(f"{domain}#{domain}")
 
 if __name__ == "__main__":
     asyncio.run(main())
