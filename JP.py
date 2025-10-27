@@ -160,7 +160,7 @@ class CloudflareNodeTester:
             octets = base_ip.split('.')
             
             # 生成该网段的一些示例IP
-            for i in range(1, 10):  # 每个网段生成9个示例IP
+            for i in range(1, 20):  # 每个网段生成9个示例IP
                 ip = f"{octets[0]}.{octets[1]}.{octets[2]}.{i + int(octets[3])}"
                 self.nodes.add(ip)
         
