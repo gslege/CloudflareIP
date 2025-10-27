@@ -11,7 +11,7 @@ from urllib3.util.retry import Retry
 TEST_TIMEOUT = 3  # 测试超时时间(秒)
 TEST_PORT = 443   # 测试端口
 MAX_THREADS = 3  # 最大线程数
-TOP_NODES = 10    # 显示和保存前N个最快节点
+TOP_NODES = 20    # 显示和保存前N个最快节点
 TXT_OUTPUT_FILE = "NL.txt"    # TXT结果保存文件
 
 # 国家代码到中文国家名称的映射
@@ -151,8 +151,8 @@ class CloudflareNodeTester:
         
         # 常见的Cloudflare IP段
         ip_ranges = [
-"104.20.0.0/22",
-"188.114.96.0/22"
+"104.20.0.0/24",
+"188.114.96.0/24"
         ]
         
         # 从IP段生成部分IP示例
