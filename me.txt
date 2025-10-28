@@ -1,7 +1,7 @@
 www.udacity.com#CF域名 55ms
 cdns.doon.eu.org#CF域名 55ms
 cf.tencentapp.cn#CF域名 58ms
-cf.877774.xyz#5CF域名 9ms
+cf.877774.xyz#CF域名 59ms
 download.yunzhongzhuan.com#CF域名 60ms
 nrtcfdns.zone.id#CF域名 61ms
 saas.sin.fan#CF域名 61ms
