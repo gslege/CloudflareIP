@@ -1,0 +1,34 @@
+name: Run Python and Commit Result
+
+on:
+  push:              # 每次 push 时触发
+  schedule:
+   - cron: '0 */1 * * *' # 每3小时运行一次
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Run script and save output
+        run: |
+          python Me.py > Me.txt
+
+      - name: Commit result
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Me.txt
+          git commit -m "Auto update Me.txt [skip ci]" || echo "No changes to commit"
+          git push
