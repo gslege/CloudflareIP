@@ -265,9 +265,6 @@ def main() -> int:
         print(f"写入文件失败: {e}")
         return 3
 
-    print(f"已导出 {len(rows)} 条记录到 {OUTPUT_FILE}")
-    return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())
