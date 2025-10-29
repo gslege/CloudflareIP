@@ -211,6 +211,9 @@ def parse_ips_and_speeds(html: str) -> List[Tuple[str, str, float]]:
 def format_output(ip: str, speed_display: str) -> str:
     return f"{ip}#【Cdtools】{speed_display}"
 
+  # 显示前N个最快节点，包含中文国家信息
+    print(f"{ip}#【Cdtools】{speed_display}")
+
 
 def main() -> int:
     all_pairs: List[Tuple[str, str, float]] = []
