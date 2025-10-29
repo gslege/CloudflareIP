@@ -187,7 +187,7 @@ def build_vless_line(domain: str, latency_ms: Optional[float]) -> str:
         .replace("自定义2", latency_text)
     )
 
-def write_top20(results: List[Tuple[str, Optional[float]]], output_path: str = "Test.txt") -> None:
+def write_top20(results: List[Tuple[str, Optional[float]]], output_path: str = "domain.txt") -> None:
     # Sort: successful first by latency asc, then failures at the end
     results_sorted = sorted(
         results,
