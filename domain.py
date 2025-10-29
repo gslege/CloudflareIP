@@ -191,7 +191,7 @@ def main():
                 else:
                     f.write(f"{domain}  {latency:.2f}ms\n")
     
-    print(f"测试完成，共测试 {len(results)} 个域名，结果已保存到 domain.txt")
+    print(f"{domain}#CF优选域名  {latency:.2f}ms\n")
 
 if __name__ == "__main__":
     main()
