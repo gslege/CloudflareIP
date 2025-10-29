@@ -33,6 +33,7 @@ jobs:
           git add Vless.txt
           git commit -m "Auto update Vless.txt [skip ci]" || echo "No changes to commit"
           git push
+          
           git add .
-          git commit -m "Resolve merge conflicts"
+          git commit -m "Merge remote changes and resolve conflicts"
           git push origin main
