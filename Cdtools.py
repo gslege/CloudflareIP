@@ -211,10 +211,6 @@ def parse_ips_and_speeds(html: str) -> List[Tuple[str, str, float]]:
 def format_output(ip: str, speed_display: str) -> str:
     return f"{ip}#【Cdtools】{speed_display}"
 
-  # 显示前N个最快节点，包含中文国家信息
-    print(f"{ip}#【Cdtools】{speed_display}")
-
-
 def main() -> int:
     all_pairs: List[Tuple[str, str, float]] = []
     any_success = False
@@ -254,7 +250,8 @@ def main() -> int:
         print(f"写入文件失败: {e}", file=sys.stderr)
         return 3
 
-    print(f"已导出 {len(lines)} 条结果到 {OUTPUT_FILE}")
+  # 显示前N个最快节点，包含中文国家信息
+    print(f"{ip}#【Cdtools】{speed_display}")
     return 0
 
 
