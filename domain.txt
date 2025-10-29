@@ -1,20 +1,20 @@
-achk.cloudflarest.link#achk.cloudflarest.link 59ms
-yx.887141.xyz#yx.887141.xyz 96ms
-xn--b6gac.eu.org#xn--b6gac.eu.org 172ms
-acjp2.cloudflarest.link#acjp2.cloudflarest.link 257ms
-cf-st.annoy.eu.org#cf-st.annoy.eu.org 280ms
-time.is#time.is 291ms
-icook.hk#icook.hk 301ms
-icook.tw#icook.tw 332ms
-emby2.misakaf.org#emby2.misakaf.org 347ms
-ip.sb#ip.sb 352ms
-www.ipaddress.my#www.ipaddress.my 353ms
-www.okcupid.com#www.okcupid.com 360ms
-japan.com#japan.com 373ms
-whatismyipaddress.com#whatismyipaddress.com 375ms
-fbi.gov#fbi.gov 383ms
-edtunnel-dgp.pages.dev#edtunnel-dgp.pages.dev 383ms
-shopify.com#shopify.com 394ms
-download.yunzhongzhuan.com#download.yunzhongzhuan.com 394ms
-www.pcmag.com#www.pcmag.com 396ms
-www.baipiao.eu.org#www.baipiao.eu.org 396ms
+yx.887141.xyz#【yx.887141.xyz】186ms
+emby2.misakaf.org#【emby2.misakaf.org】196ms
+achk.cloudflarest.link#【achk.cloudflarest.link】225ms
+xn--b6gac.eu.org#【xn--b6gac.eu.org】230ms
+acjp2.cloudflarest.link#【acjp2.cloudflarest.link】301ms
+shopify.com#【shopify.com】304ms
+time.is#【time.is】314ms
+cf-st.annoy.eu.org#【cf-st.annoy.eu.org】315ms
+www.gco.gov.qa#【www.gco.gov.qa】368ms
+www.gov.se#【www.gov.se】369ms
+www.baipiao.eu.org#【www.baipiao.eu.org】369ms
+log.bpminecraft.com#【log.bpminecraft.com】380ms
+www.zsu.gov.ua#【www.zsu.gov.ua】384ms
+edtunnel-dgp.pages.dev#【edtunnel-dgp.pages.dev】384ms
+icook.tw#【icook.tw】394ms
+gur.gov.ua#【gur.gov.ua】402ms
+fbi.gov#【fbi.gov】403ms
+www.4chan.org#【www.4chan.org】414ms
+www.udacity.com#【www.udacity.com】415ms
+japan.com#【japan.com】423ms
