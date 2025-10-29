@@ -1,4 +1,4 @@
-name: Run Python and Commit Result
+name: JP
 
 on:
   push:              # 每次 push 时触发
