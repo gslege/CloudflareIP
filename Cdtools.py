@@ -251,7 +251,7 @@ def main() -> int:
         return 3
 
   # 显示前N个最快节点，包含中文国家信息
-def format_output(ip: str, speed_display: str) -> str:
+def format_output(ip: str, speed_display: str):
     print(f"{ip}#【Cdtools】{speed_display}")
     return 0
 
