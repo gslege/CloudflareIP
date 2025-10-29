@@ -116,7 +116,7 @@ RAW_ITEMS = [
 ]
 
 VLESS_TEMPLATE = (
-    "vless://6185b18f-f175-40fd-b6e2-1674795839ab@自定义1:443?encryption=none&security=tls&sni=misaka.cloudip.ggff.net&fp=random&type=ws&host=misaka.cloudip.ggff.net&path=%2F%3Fed%3D2560#自定义1"
+    "自定义1#自定义2"
 )
 
 DOMAIN_REGEX = re.compile(r"^(?=.{1,253}$)(?!-)([A-Za-z0-9-]{1,63}\.)+[A-Za-z]{2,63}\.?$")
@@ -210,7 +210,7 @@ async def main() -> None:
     )[:20]
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
-        print(f"{domain}#{domain}")
+        print(f"{domain}#【{domain}】{status}")
 
 if __name__ == "__main__":
     asyncio.run(main())
