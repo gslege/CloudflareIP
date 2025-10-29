@@ -1,4 +1,4 @@
-name: CF
+name: result
 
 on:
   push:              # 每次 push 时触发
