@@ -33,3 +33,4 @@ jobs:
           git add domain.txt
           git commit -m "Auto update domain.txt [skip ci]" || echo "No changes to commit"
           git push
+          git pull origin main
