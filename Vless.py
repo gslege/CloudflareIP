@@ -193,7 +193,7 @@ def write_top20(results: List[Tuple[str, Optional[float]]], output_path: str = "
         results,
         key=lambda item: (1, float("inf")) if item[1] is None else (0, item[1])
     )
-    top20 = results_sorted[:80]
+    top20 = results_sorted[:20]
     lines = [build_vless_line(domain, ms) for domain, ms in top20]
     with open(output_path, "w", encoding="utf-8") as f:
         for line in lines:
