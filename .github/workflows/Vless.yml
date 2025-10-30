@@ -33,3 +33,6 @@ jobs:
           git add Vless.txt
           git commit -m "Auto update Vless.txt [skip ci]" || echo "No changes to commit"
           git push
+          git pull origin main
+          git add <冲突文件>
+          git push origin main
