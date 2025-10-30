@@ -211,5 +211,5 @@ async def main() -> None:
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
         print(f"vless://b86ce95e-d3a7-4173-acb7-d041b3504b56@{domain}:443?encryption=none&security=tls&sni=misaka.cndyw.ggff.net&fp=random&type=ws&host=misaka.cndyw.ggff.net&path=%2F%3Fed%3D2560#{domain}")
-      if __name__ == "__main__":
+if __name__ == "__main__":
     asyncio.run(main())
