@@ -33,4 +33,13 @@ jobs:
           git add Vless.txt
           git commit -m "Auto update Vless.txt [skip ci]" || echo "No changes to commit"
           git push
-          git pull origin main
+
+
+- name: Pull latest changes
+  run: git pull origin main
+
+- name: Push changes
+  run: |
+    git config --global user.name "github-actions[bot]"
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git push origin main
