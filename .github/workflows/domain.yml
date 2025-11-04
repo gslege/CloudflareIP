@@ -24,7 +24,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python domain.py > domain.txt
+          python py/domain.py > domain.txt
 
       - name: Commit result
         run: |
