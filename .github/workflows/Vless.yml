@@ -24,7 +24,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python Vless.py > Vless.txt
+          python py/Vless.py > Vless.txt
 
       - name: Commit result
         run: |
