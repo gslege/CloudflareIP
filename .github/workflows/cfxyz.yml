@@ -23,7 +23,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python cfxyz.py > cfxyz.txt
+          python py/cfxyz.py > cfxyz.txt
 
       - name: Commit result
         run: |
