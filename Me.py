@@ -243,7 +243,7 @@ def parse_and_sort(html: str) -> List[Tuple[str, str, str, float]]:
 def save_results(rows: List[Tuple[str, str, str, float]], path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         for ip, line, speed_text, _ in rows:
-            line_text = f"{ip}#【{line or '未知'}】{speed_text or ''}"
+            line_text = f"{ip}#【{line or '未知'} Nodes】{speed_text or ''}"
             f.write(line_text + "\n")
 
 
