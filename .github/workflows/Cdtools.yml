@@ -24,7 +24,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python Cdtools.py > Cdtools.txt
+          python py/Cdtools.py > Cdtools.txt
 
       - name: Commit result
         run: |
