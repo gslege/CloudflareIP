@@ -24,7 +24,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python NL.py > NL.txt
+          python py/NL.py > NL.txt
 
       - name: Commit result
         run: |
