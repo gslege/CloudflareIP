@@ -24,7 +24,7 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python SG.py > SG.txt
+          python py/SG.py > SG.txt
 
       - name: Commit result
         run: |
