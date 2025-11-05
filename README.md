@@ -2,7 +2,7 @@
 
 <b>免费Vless节点1</b>：https://d.igdux.com/wKMp
 
-<b>免费Clash节点1https://d.igdux.com/VyqL
+<b>免费Clash节点1</b>：https://d.igdux.com/VyqL
 
 
 <b>免费Vless节点2</b>：https://d.igdux.com/wdx9
