@@ -1,3 +1,2 @@
-Found 10 potential nodes.
-Found 10 unique nodes after deduplication.
-Successfully wrote 5 nodes with latency < 500ms to nodes.txt
+vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@162.159.39.122:443?encryption=none&security=tls&sni=free.cndyw.ggff.net&fp=random&type=ws&host=free.cndyw.ggff.net&path=%2F%3Fed%3D2048#%5B%20Cloudflare%20%5D%2068.91MB%2Fs
+
