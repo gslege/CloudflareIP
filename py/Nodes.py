@@ -106,7 +106,7 @@ def main():
         for item in nodes_with_latency:
             f.write(f"{item['node']}\n")
 
-    print(f"{item['node']}\n")
+    print(f"{item['all_nodes']}\n")
 
 if __name__ == "__main__":
     main()
