@@ -86,12 +86,8 @@ def main():
             if content:
                 all_nodes.extend(extract_nodes(content, url))
 
-    print(f"Found {len(all_nodes)} potential nodes.")
-
     # Deduplicate nodes
     all_nodes = list(set(all_nodes))
-
-    print(f"Found {len(all_nodes)} unique nodes after deduplication.")
 
     # Measure latency and filter
     nodes_with_latency = []
@@ -110,7 +106,7 @@ def main():
         for item in nodes_with_latency:
             f.write(f"{item['node']}\n")
 
-    print(f"Successfully wrote {len(nodes_with_latency)} nodes with latency < 500ms to nodes.txt")
+    print(f"{item['node']}\n")
 
 if __name__ == "__main__":
     main()
