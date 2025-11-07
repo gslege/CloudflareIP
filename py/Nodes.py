@@ -104,9 +104,9 @@ def main():
 
     with open('nodes.txt', 'w', encoding='utf-8') as f:
         for item in nodes_with_latency:
-            f.write(f"{item['all_nodes']}\n")
+            f.write(f"{item['nodes']}\n")
 
-    print(f"{item['all_nodes']}\n")
+    print(f"{item['nodes']}\n")
 
 if __name__ == "__main__":
     main()
