@@ -1,1 +1,8 @@
-108.162.198.37#【Free Nodes】69.31MB/s
+172.64.229.130#【Free Nodes】69.66MB/s
+172.64.159.242#【Free Nodes】61.68MB/s
+172.64.157.208#【Free Nodes】60.7MB/s
+172.64.149.2#【Free Nodes】58.95MB/s
+172.64.148.192#【Free Nodes】57.51MB/s
+172.64.154.206#【Free Nodes】56.59MB/s
+172.64.35.92#【Free Nodes】55.47MB/s
+172.64.52.238#【Free Nodes】2.19MB/s
