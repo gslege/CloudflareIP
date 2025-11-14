@@ -2,7 +2,7 @@
 
 <b>手搓CF节点极简版</b>：<a href=https://github.com/gslege/CloudflareIP/blob/main/_worker.js>_worker.js</a>，默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改。
 
-<b>节点生成器：https://sub.cndyw.ggff.net</b>
+<b>手搓CF节点生成器：https://sub.cndyw.ggff.net</b>
 
 <b>免费自适应节点a</b>：https://suba.cndyw.ggff.net/suba?sub
 
