@@ -1,5 +1,7 @@
 全自动优选CF的IP，包含美国US，日本JP，新加坡SG，德国DE，荷兰NL等cloudflare每天每小时自动优选IP，自动生成CF免费Vless节点和免费Clash节点。
 
+手搓节点极简版：<a href=https://github.com/gslege/CloudflareIP/blob/main/_worker.js>_worker.js</a>，默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改。
+
 <b>节点生成器：https://sub.cndyw.ggff.net</b>
 
 <b>免费自适应节点a</b>：https://suba.cndyw.ggff.net/suba?sub
