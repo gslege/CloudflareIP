@@ -152,6 +152,7 @@ class CloudflareNodeTester:
         # 常见的Cloudflare IP段
         ip_ranges = [
 "108.162.198.0/22",
+"18.179.45.0/22",
 "162.159.38.174/22"
         ]
         
