@@ -1,4 +1,4 @@
-//推荐使用Pages部署，无需自定义域名而且稳定，默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改，然后用手搓CF节点生成器(https://sub.cndyw.ggff.net/)生成节点导入到v2ray或karing中使用。
+//推荐使用Pages上传部署（如需wokers部署或反复部署就删除默认节点代码），无需自定义域名而且稳定，默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改，然后用手搓CF节点生成器(https://sub.cndyw.ggff.net/)生成节点导入到v2ray或karing中使用
 
 import { connect } from 'cloudflare:sockets';
 
@@ -18,13 +18,19 @@ export default {
       const 部署域名 = new URL(访问请求.url).hostname;
       return new Response(`部署成功！
 
-        你的UUID: ${我的VL密钥}
+   你的UUID: ${我的VL密钥}
 
-        你的部署域名：${部署域名}
+   你的部署域名：${部署域名}
 
-        你的反代ip：${反代IP}
+   你的反代ip：${反代IP}
 
-默认手搓节点：vless://${我的VL密钥}@108.162.192.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sub.cndyw.ggff.net
+默认节点：
+
+vless://${我的VL密钥}@108.162.192.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sg 新加坡 SG
+vless://${我的VL密钥}@108.162.198.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#jp 日本 JP
+vless://${我的VL密钥}@104.18.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#us 美国 US
+vless://${我的VL密钥}@104.25.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#de 德国 DE
+vless://${我的VL密钥}@104.20.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#nl 荷兰 NL
 
 更多节点使用手搓节点生成器： http://sub.cndyw.ggff.net`, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     }
