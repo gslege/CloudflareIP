@@ -1,4 +1,4 @@
-name: domain
+name: Domain
 
 on:
   push:              # 每次 push 时触发
@@ -24,13 +24,13 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python py/domain.py > domain.txt
+          python py/Domain.py > Domain.txt
 
       - name: Commit result
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add domain.txt
-          git commit -m "Auto update domain.txt [skip ci]" || echo "No changes to commit"
+          git add Domain.txt
+          git commit -m "Auto update Domain.txt [skip ci]" || echo "No changes to commit"
           git push
           git pull origin main
