@@ -7,3 +7,5 @@
 <b>免费自适应节点a</b>：https://suba.cndyw.ggff.net/suba?sub
 
 <b>免费自适应节点b</b>：https://subb.cndyw.ggff.net/subb?sub
+
+<img src="https://sub.cndyw.ggff.net/ys.png">
