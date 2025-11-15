@@ -24,7 +24,7 @@ export default {
 
         你的反代ip：${反代IP}
 
-默认手搓节点：vless://${我的VL密钥}@www.wto.org:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sub.cndyw.ggff.net
+默认手搓节点：vless://${我的VL密钥}@108.162.192.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sub.cndyw.ggff.net
 
 更多节点使用手搓节点生成器： http://sub.cndyw.ggff.net`, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     }
