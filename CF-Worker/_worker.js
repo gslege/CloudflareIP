@@ -1,3 +1,5 @@
+//推荐使用Pages部署，无需自定义域名而且稳定，默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改，然后用手搓CF节点生成器(https://sub.cndyw.ggff.net/)生成节点导入到v2ray或karing中使用。
+
 import { connect } from 'cloudflare:sockets';
 
 let 我的VL密钥 = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';//UUID
