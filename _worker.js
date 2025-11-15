@@ -13,7 +13,18 @@ export default {
       启动传输管道(WS接口);
       return new Response(null, { status: 101, webSocket: 客户端 });
     } else {
-      return new Response('hello world', { status: 200 });
+      const 部署域名 = new URL(访问请求.url).hostname;
+      return new Response(`部署成功！
+
+        你的UUID: ${我的VL密钥}
+
+        你的部署域名：${部署域名}
+
+        你的反代ip：${反代IP}
+
+默认手搓节点：vless://${我的VL密钥}@www.wto.org:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sub.cndyw.ggff.net
+
+更多节点使用手搓节点生成器： http://sub.cndyw.ggff.net`, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     }
   }
 };
