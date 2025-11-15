@@ -1,4 +1,4 @@
-name: result
+name: All
 
 on:
   push:              # 每次 push 时触发
@@ -24,12 +24,12 @@ jobs:
 
       - name: Run script and save output
         run: |
-          python py/result.py > result.txt
+          python py/All.py > All.txt
 
       - name: Commit result
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add result.txt
-          git commit -m "Auto update result.txt [skip ci]" || echo "No changes to commit"
+          git add All.txt
+          git commit -m "Auto update All.txt [skip ci]" || echo "No changes to commit"
           git push
