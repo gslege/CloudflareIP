@@ -209,8 +209,8 @@ def parse_ips_and_speeds(html: str) -> List[Tuple[str, str, float]]:
 
 
 def format_output(ip: str, speed_display: str) -> str:
-    print(f"{ip}#【Cdtools Nodes】{speed_display}")
-    return f"{ip}#【Cdtools Nodes】{speed_display}"
+    print(f"{ip}#【优选 Nodes】{speed_display}")
+    return f"{ip}#【优选 Nodes】{speed_display}"
 
 def main() -> int:
     all_pairs: List[Tuple[str, str, float]] = []
