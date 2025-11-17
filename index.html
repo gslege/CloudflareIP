@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免费VLESS节点链接生成器</title>
+    <title>手搓VLESS节点生成器</title>
     <style>
         * {
             margin: 0;
@@ -49,7 +49,7 @@
 
         .copy-all-btn {
             display: inline-block;
-            width: 66%;
+            width: 50%;
             padding: 12px;
             margin: 20px 1%;
             background-color: #4CAF50;
@@ -159,18 +159,111 @@
             pointer-events: none;
             z-index: 10;
         }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            /* 页面边距 */
+            body {
+                padding: 10px;
+                font-size: 16px;
+                line-height: 1.5;
+            }
+            
+            /* 容器调整 */
+            .container {
+                padding: 15px;
+                margin: 10px auto;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* 按钮调整 */
+            .copy-all-btn {
+                width: 100%;
+                margin: 15px 0;
+                font-size: 18px;
+                padding: 15px;
+            }
+            
+            /* 标题字体大小 */
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            /* 节点列表项调整 */
+            li {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            li a {
+                font-size: 0.9rem;
+            }
+            
+            /* 作者GitHub链接调整 */
+            .container > div:first-child {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            
+            /* IP来源链接区域调整 */
+            div[style*="margin: 20px 0;"]:nth-last-child(2) {
+                margin: 20px 0;
+            }
+            
+            /* 预设链接文本调整 */
+            .preset-link {
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+            
+            /* 输入框调整 */
+            input[type="text"] {
+                padding: 12px;
+                font-size: 16px;
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            /* 节点链接文本调整 */
+            .link {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+            
+            /* 文本行高调整 */
+            p {
+                line-height: 1.5;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-      <div style="position: absolute; top: 10px; right: 10px;">
-        <a href="https://github.com/gslege/CloudflareIP" target="_blank" style="color: #FF9800; text-decoration: none; font-weight: bold;">作者GitHub</a>
+      <div style="position: absolute; top: 10px; left: 10px;">
+        <a href="https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js" target="_blank" style="color: #FF9800; text-decoration: none; font-weight: bold;">手搓部署代码>></a>
       </div>
-      <h1>免费VLESS节点链接生成器</h1>
-    <button id="copyAllBtn" class="copy-all-btn">一键复制全部</button>
+      <div style="position: absolute; top: 10px; right: 10px;">
+        <a href="https://github.com/gslege/CloudflareIP" target="_blank" style="color: #FF9800; text-decoration: none; font-weight: bold;">作者GitHub>></a>
+      </div><br/>
+
+      <h1>手搓VLESS节点生成器</h1>
+
       <div style="margin: 20px 0;">
         <label for="uuidInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">UUID:</label>
         <input type="text" id="uuidInput" placeholder="04c808e2-0b59-47b0-a54b-32fc7ef1c902" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
+      </div>
+
+            <div style="margin: 20px 0;">
+        <label for="custom3Input" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">反代IP</label>
+        <input type="text" id="custom3Input" placeholder="proxyip.cmliussss.net" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
       </div>
       
       <div style="margin: 20px 0;">
@@ -178,23 +271,30 @@
         <input type="text" id="domainInput" placeholder="free.cndyw.ggff.net" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
       </div>
       
-      <div style="margin: 20px 0;">
+      <div style="margin: 20px 0; text-align: left;">
         <label for="ipSourceInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">IP来源网址:</label>
-        <input type="text" id="ipSourceInput" placeholder="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
-<br/><br/>【如果没有IP来源网址就点击以下网址会自动复制到输入框中，IP节点每小时更新一次】<br/><br/>
-运营商优选：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt</a><br/>
-新加坡节点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt</a><br/>
-日   本    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt</a><br/>
-美   国    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt</a><br/>
-德   国    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/DE.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/DE.txt</a><br/>
-荷   兰    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/NL.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/NL.txt</a><br/>
-优选节点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cdtools.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cdtools.txt</a><br/>
-测   速    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/cfxyz.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/cfxyz.txt</a><br/>
-全   部    节   点：<a href="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/result.txt" class="preset-link">https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/result.txt</a><br/>
-      </div>
-      
-      <button id="generateBtn" class="copy-all-btn generate-btn">一键生成节点</button>
-      
+        <input type="text" id="ipSourceInput" placeholder="https://ip.gslege.ggff.net/Me.txt" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
+        <select id="presetIpSelect" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
+          <option value="">选择预设IP来源</option>
+          <option value="https://ip.gslege.ggff.net/Me.txt">运营商IP</option>
+          <option value="https://ip.gslege.ggff.net/SG.txt">新加坡IP</option>
+          <option value="https://ip.gslege.ggff.net/JP.txt">日本IP</option>
+          <option value="https://ip.gslege.ggff.net/US.txt">美国IP</option>
+          <option value="https://ip.gslege.ggff.net/DE.txt">德国IP</option>
+          <option value="https://ip.gslege.ggff.net/NL.txt">荷兰IP</option>
+          <option value="https://ip.gslege.ggff.net/Cdtools.txt">优选IP</option>
+          <option value="https://ip.gslege.ggff.net/Cfxyz.txt">测速IP</option>
+         <option value="https://ip.gslege.ggff.net/More.txt">更多IP</option>
+        </select>
+<div style="font-size: 12px;color: #FF9800; text-align: center;">方法1：输入自己的UUID，部署域名和IP来源网址，一键生成节点即可。方法2：使用默认的UUID，部署域名，再选预设IP来源后一键生成。</div>
+      <div style="text-align: center;"><button id="generateBtn" class="copy-all-btn generate-btn">一键生成节点</button></div>
+     <div style="font-size: 12px;color: #FF9800; text-align: center;">一键复制Vless节点后推荐导入<b>v2ray</b>或<b>karing</b>中使用。</div> 
+
+<div style="text-align: center;"><button id="copyAllBtn" class="copy-all-btn">一键复制全部</button></div> 
+<div style="font-size: 12px;color: #FF9800; text-align: center;">免费的节点每天有流量限制，建议使用<a href="https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js"  target="_blank" style="color: #888888; text-decoration: none; font-weight: bold;">_worker.js</a>部署自己的节点使用！</div> 
+
+</div>     
+
       <div id="results"></div>
     </div>
 
@@ -203,7 +303,8 @@
             // 默认UUID、域名和IP来源网址
             const defaultUUID = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';
             const defaultDomain = 'free.cndyw.ggff.net';
-            const defaultIpSource = 'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt';
+            const defaultCustom3 = 'proxyip.cmliussss.net';
+            const defaultIpSource = 'https://ip.gslege.ggff.net/Me.txt';
             
             // 预设IP来源链接点击事件
             const presetLinks = document.querySelectorAll('.preset-link');
@@ -232,8 +333,34 @@
                 });
             });
 
+            // 预设IP来源下拉菜单事件
+            const presetIpSelect = document.getElementById('presetIpSelect');
+            presetIpSelect.addEventListener('change', () => {
+                const selectedUrl = presetIpSelect.value;
+                const ipSourceInput = document.getElementById('ipSourceInput');
+                
+                // 填充到输入框
+                if (selectedUrl) {
+                    ipSourceInput.value = selectedUrl;
+                    
+                    // 复制到剪贴板
+                    navigator.clipboard.writeText(selectedUrl)
+                        .then(() => {
+                            // 提供视觉反馈
+                            const originalColor = presetIpSelect.style.color;
+                            presetIpSelect.style.color = '#4CAF50';
+                            setTimeout(() => {
+                                presetIpSelect.style.color = originalColor;
+                            }, 1000);
+                        })
+                        .catch(err => {
+                            console.error('复制失败:', err);
+                        });
+                }
+            });
+
             // 生成链接函数
-            async function generateLinks(uuid = defaultUUID, domain = defaultDomain, ipSource = defaultIpSource) {
+            async function generateLinks(uuid = defaultUUID, domain = defaultDomain, ipSource = defaultIpSource, custom3 = defaultCustom3) {
                 const resultsDiv = document.getElementById('results');
                 resultsDiv.innerHTML = '<p>正在获取内容并生成链接，请稍候...</p>';
 
@@ -251,7 +378,7 @@
                     }
 
                     // VLESS链接模板
-                    const vlessTemplate = `vless://${uuid}@自定义1:443?encryption=none&security=tls&sni=${domain}&fp=random&type=ws&host=${domain}&path=pyip%3Dbpb.yousef.isegaro.com#自定义2`;
+                    const vlessTemplate = `vless://${uuid}@自定义1:443?encryption=none&security=tls&sni=${domain}&fp=random&type=ws&host=${domain}&path=pyip%3D${custom3}#自定义2`;
 
                     // 生成VLESS链接
                     const links = [];
@@ -264,7 +391,7 @@
                         const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
                         if (!ipRegex.test(ip)) return;
                         
-                        const vlessLink = vlessTemplate.replace('自定义1', ip).replace('自定义2', name);
+                        const vlessLink = vlessTemplate.replace('自定义1', ip).replace('自定义2', name).replace('自定义3', custom3);
                         links.push(`<li>${name}<span class="link">${vlessLink}</span><span class="copy-tip">已复制</span></li>`);
                     });
                     
@@ -321,7 +448,8 @@
                 const uuid = document.getElementById('uuidInput').value || defaultUUID;
                 const domain = document.getElementById('domainInput').value || defaultDomain;
                 const ipSource = document.getElementById('ipSourceInput').value || defaultIpSource;
-                generateLinks(uuid, domain, ipSource);
+                const custom3 = document.getElementById('custom3Input').value || defaultCustom3;
+                generateLinks(uuid, domain, ipSource, custom3);
             });
 
             // 一键复制全部链接功能
@@ -350,4 +478,5 @@
             });
         });
     </script>
+</body>
 </html>
