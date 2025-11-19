@@ -289,7 +289,7 @@ class CloudflareNodeTester:
         # 显示前N个最快节点，包含中文国家信息
         for i, node in enumerate(sorted_nodes[:TOP_NODES], 1):
             country = get_ip_country(node['ip'])
-            print(f"{node['ip']}#【cloudflare】优选节点")
+            print(f"{node['ip']}#CF 优选IP")
         
         return sorted_nodes
     
@@ -414,6 +414,7 @@ if __name__ == "__main__":
         print("\n用户中断了程序")
     except Exception as e:
         print(f"程序出错: {e}")
+
 
 
 
