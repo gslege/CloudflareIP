@@ -34,11 +34,12 @@ export default {
    你的反代ip：${反代IP}
 
 默认节点：
+vless://${我的VL密钥}@${部署域名}:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#${部署域名}
 vless://${我的VL密钥}@108.162.192.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#sg 新加坡 SG
 vless://${我的VL密钥}@108.162.198.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#jp 日本 JP
 vless://${我的VL密钥}@104.18.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#us 美国 US
-vless://${我的VL密钥}@104.25.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#de 德国 DE
-vless://${我的VL密钥}@104.20.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#nl 荷兰 NL
+vless://${我的VL密钥}@104.26.0.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#de 德国 DE
+vless://${我的VL密钥}@188.114.96.0:443?encryption=none&security=tls&sni=${部署域名}&fp=random&type=ws&host=${部署域名}&path=pyip%3D${反代IP}#nl 荷兰 NL
 
 更多节点使用手搓节点生成器： http://sub.cndyw.ggff.net`, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
         } else {
