@@ -4,7 +4,7 @@
 
 复刻本仓库然后部署到cloudflare上，即可生成自己的节点生成器页面！
 
-<b>手搓CF节点生成器：https://sub.cndyw.ggff.net</b> 或 <b>https://ip.gslege.ggff.net</b> 
+<b>手搓CF节点生成器：https://sub.cndyw.ggff.net</b>
 
 <b>免费自适应节点a</b>：https://suba.cndyw.ggff.net/suba?sub
 
