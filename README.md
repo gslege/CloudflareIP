@@ -6,10 +6,10 @@
 
 <b>手搓CF节点生成器：https://sub.cndyw.ggff.net</b>
 
-<b>免费自适应节点a</b>：https://free.cndyw.ggff.net/sub
+<b>免费Vless节点a</b>：https://free.cndyw.ggff.net/sub
 
-<b>免费自适应节点b</b>：https://misaka.cndyw.ggff.net/sub
+<b>免费Vless节点b</b>：https://misaka.cndyw.ggff.net/sub
 
-<b>免费自适应节点c</b>：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Vless.txt
+<b>免费Vless节点c</b>：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Vless.txt
 
 公益节点用的人多，会消耗完每天的流量额度，建议使用_worker.js自己部署！
