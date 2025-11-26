@@ -6,8 +6,8 @@
 
 <b>手搓CF节点生成器：https://sub.cndyw.ggff.net</b>
 
-<b>免费自适应节点a</b>：https://suba.cndyw.ggff.net/suba?sub
+<b>免费自适应节点a</b>：https://free.cndyw.ggff.net/sub
 
-<b>免费自适应节点b</b>：https://subb.cndyw.ggff.net/subb?sub
+<b>免费自适应节点b</b>：https://misaka.cndyw.ggff.net/sub
 
 公益节点用的人多，会消耗完每天的流量额度，建议使用_worker.js自己部署！
