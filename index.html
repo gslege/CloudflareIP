@@ -269,7 +269,7 @@
       
       <div style="margin: 20px 0; text-align: left;">
         <label for="ipSourceInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left; ">IP来源网址:</label>
-        <input type="text" id="ipSourceInput" placeholder="https://ip.gslege.ggff.net/Me.txt" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd; display: none;">
+        <input type="text" id="ipSourceInput" placeholder="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd; display: none;">
         <select id="presetIpSelect" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
           <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt">运营商IP</option>
           <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt">新加坡IP</option>
@@ -302,7 +302,7 @@
             const defaultUUID = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';
             const defaultDomain = 'free.cndyw.ggff.net';
             const defaultCustom3 = 'proxyip.cmliussss.net';
-            const defaultIpSource = 'https://ip.gslege.ggff.net/Me.txt';
+            const defaultIpSource = 'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt';
             
             // 预设IP来源链接点击事件
             const presetLinks = document.querySelectorAll('.preset-link');
@@ -463,7 +463,7 @@
                     await navigator.clipboard.writeText(text);
                     const btn = document.getElementById('copyAllBtn');
                     const originalText = btn.textContent;
-                    btn.textContent = '已复制!';
+                    btn.textContent = '已复制';
                     btn.classList.add('copied');
                     setTimeout(() => {
                         btn.textContent = originalText;
