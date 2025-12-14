@@ -16,4 +16,4 @@
 
 <b>免费Vless节点e</b>：https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Vless.txt
 
-公益节点用的人多，会消耗完每天的流量额度，建议使用<a href=https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js>_worker.js</a>自己部署！
+公益节点用的人多，会消耗完每天的流量额度，建议使用<a href=https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js>_worker.js</a>自己部署或<b><a href=https://ip.cloudip.ggff.net>手搓节点</a></b>！
