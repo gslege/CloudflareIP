@@ -210,6 +210,6 @@ async def main() -> None:
     )[:20]
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
-        print(f"vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@{domain}:443?encryption=none&security=tls&sni=misaka.cndyw.ggff.net&fp=random&type=ws&host=misaka.cndyw.ggff.net&path=%2F%3Fed%3D2560#【Free Nodes】{status}")
+        print(f"vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@{domain}:443?encryption=none&security=tls&sni=misaka.cndyw.ggff.net&fp=random&type=ws&host=misaka.cndyw.ggff.net&path=%2F%3Fed%3D2560# Free | 域名 | {status}")
 if __name__ == "__main__":
     asyncio.run(main())
