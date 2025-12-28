@@ -210,7 +210,7 @@ async def main() -> None:
     )[:20]
     for domain, ms in printable:
         status = "timeout" if ms is None else f"{int(round(ms))}ms"
-        print(f"{domain}#{domain} {status}")
+        print(f"{domain}#CF|优选域名|{status}")
 
 if __name__ == "__main__":
     asyncio.run(main())
