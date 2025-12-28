@@ -1,20 +1,20 @@
-yx.887141.xyz#yx.887141.xyz 101ms
-www.ipaddress.my#www.ipaddress.my 286ms
-www.pcmag.com#www.pcmag.com 315ms
-www.baipiao.eu.org#www.baipiao.eu.org 319ms
-www.gov.se#www.gov.se 320ms
-whatismyipaddress.com#whatismyipaddress.com 322ms
-gur.gov.ua#gur.gov.ua 331ms
-www.iakeys.com#www.iakeys.com 341ms
-log.bpminecraft.com#log.bpminecraft.com 341ms
-www.udacity.com#www.udacity.com 343ms
-emby2.misakaf.org#emby2.misakaf.org 348ms
-www.iplocation.net#www.iplocation.net 348ms
-www.ipchicken.com#www.ipchicken.com 350ms
-cf.zhetengsha.eu.org#cf.zhetengsha.eu.org 354ms
-shopify.com#shopify.com 363ms
-fbi.gov#fbi.gov 364ms
-cfip.1323123.xyz#cfip.1323123.xyz 365ms
-xn--b6gac.eu.org#xn--b6gac.eu.org 374ms
-www.gco.gov.qa#www.gco.gov.qa 378ms
-icook.hk#icook.hk 380ms
+cfip.xxxxxxxx.tk#CF|优选域名|60ms
+yx.887141.xyz#CF|优选域名|82ms
+xn--b6gac.eu.org#CF|优选域名|172ms
+shopify.com#CF|优选域名|289ms
+icook.hk#CF|优选域名|290ms
+icook.tw#CF|优选域名|298ms
+japan.com#CF|优选域名|336ms
+emby2.misakaf.org#CF|优选域名|340ms
+malaysia.com#CF|优选域名|374ms
+time.is#CF|优选域名|415ms
+skk.moe#CF|优选域名|416ms
+cf.0sm.com#CF|优选域名|434ms
+singapore.com#CF|优选域名|434ms
+www.visa.com#CF|优选域名|449ms
+www.visa.com.tw#CF|优选域名|467ms
+russia.com#CF|优选域名|471ms
+www.visa.com.hk#CF|优选域名|487ms
+www.visa.com.sg#CF|优选域名|506ms
+www.ipchicken.com#CF|优选域名|554ms
+cf.877771.xyz#CF|优选域名|561ms
