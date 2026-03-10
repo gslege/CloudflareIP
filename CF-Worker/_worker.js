@@ -1,25 +1,25 @@
 //推荐使用Pages上传部署（如需wokers部署或反复部署就删除默认节点代码），无需自定义域名而且稳定
-//默认UUID：04c808e2-0b59-47b0-a54b-32fc7ef1c902 建议部署时修改
+//默认UUID：14c366de-e9b0-4a6a-8a72-43d2f3884051 建议部署时修改
 //默认反代IP：proxyip.cmliussss.net 无特殊要求无须修改
 //部署后用手搓CF节点生成器(https://sub.cndyw.ggff.net/)生成节点导入到v2ray或karing中使用
 //默认节点显示路径：https://部署域名/sub
 
 import { connect } from 'cloudflare:sockets';
 
-let 我的VL密钥 = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';//UUID
+let 我的VL密钥 = '14c366de-e9b0-4a6a-8a72-43d2f3884051';//UUID
 let 反代IP = 'proxyip.cmliussss.net'; //反代IP
 
 export default {
   async fetch(访问请求) {
-    if (访问请求.headers.get('Upgrade') === 'websocket') {
+    如果 (访问请求.headers.get('Upgrade') === 'websocket') {
       const 读取路径 = decodeURIComponent(访问请求.url.replace(/^https?:\/\/[^/]+/, ''));
       反代IP = 读取路径.match(/ip=([^&]+)/)?.[1] || 反代IP;
-      const [客户端, WS接口] = Object.values(new WebSocketPair());
-      WS接口.accept();
+      const [客户端, WS接口] = Object.值(新 WebSocketPair());
+      WS接口.接受();
       启动传输管道(WS接口);
-      return new Response(null, { status: 101, webSocket: 客户端 });
+      return new 响应(空, { status: 101, webSocket: 客户端 });
     } else {
-        const 请求URL = new URL(访问请求.url);
+        const 请求URL = new URL(访问请求.网址);
         const 部署域名 = 请求URL.hostname;
         const 请求路径 = 请求URL.pathname;
 
@@ -27,9 +27,9 @@ export default {
         const 节点路径 = '/sub';
 
         if (请求路径 === 节点路径) {
-            return new Response(`部署成功！
+            return new 响应(`部署成功！
 
-   你的UUID: ${我的VL密钥}
+你的UUID：${我的VL密钥}
    你的部署域名：${部署域名}
    你的反代ip：${反代IP}
 
