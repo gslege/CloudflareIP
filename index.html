@@ -3,483 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手搓VLESS节点生成器</title>
+    <title>VLESS节点生成器</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --clr-primary: #6366f1;
+            --clr-primary-dark: #4f46e5;
+            --clr-accent: #f59e0b;
+            --clr-success: #10b981;
+            --clr-danger: #ef4444;
+            --clr-bg-start: #0f0c29;
+            --clr-bg-mid: #302b63;
+            --clr-bg-end: #24243e;
+            --clr-card-bg: #ffffff;
+            --clr-text: #1e293b;
+            --clr-text-secondary: #64748b;
+            --clr-border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --rad: 12px;
+            --rad-sm: 8px;
+            --tran: 0.25s cubic-bezier(0.4,0,0.2,1);
         }
-        
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(-45deg, var(--clr-bg-start), var(--clr-bg-mid), var(--clr-bg-end), #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
             min-height: 100vh;
-            padding: 20px;
+            padding: 30px 20px;
+            color: var(--clr-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
-        
+        @keyframes gradientShift {
+            0%,100% { background-position:0% 50%; }
+            50% { background-position:100% 50%; }
+        }
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            text-align: center;
-            position: relative;
+            max-width: 860px;
+            margin:0 auto;
+            background: var(--clr-card-bg);
+            border-radius:20px;
+            box-shadow: var(--shadow-lg);
+            padding: 36px 32px;
+            position:relative;
+            overflow:hidden;
         }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            text-align: center;
+        .container::before {
+            content:'';
+            position:absolute;
+            top:0;left:0;right:0;
+            height:4px;
+            background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent), #ec4899, var(--clr-primary));
+            background-size:300% 100%;
+            animation: shimmer 3s ease infinite;
         }
-        
-        #results {
-            margin-top: 20px;
+        @keyframes shimmer {
+            0%,100% { background-position:0% 50%; }
+            50% { background-position:100% 50%; }
         }
-        
-        #results p {
-            color: #666;
-            text-align: center;
-            margin: 20px 0;
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:28px;
+            padding-bottom:20px;
+            border-bottom:2px solid var(--clr-border);
         }
+        .header-left { display:flex; align-items:center; gap:12px; }
+        .logo-icon {
+            width:44px;height:44px;
+            border-radius:12px;
+            background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+            display:flex;align-items:center;justify-content:center;
+            font-size:22px;
+            box-shadow:0 4px 12px rgba(99,102,241,0.3);
+        }
+        .header h1 { font-size:1.6rem; font-weight:700; color:var(--clr-text); letter-spacing:-0.02em; }
+        .header h1 span {
+            background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .github-link {
+            display:inline-flex;align-items:center;gap:6px;
+            padding:8px 16px;border-radius:20px;
+            background:#f1f5f9;color:var(--clr-text-secondary);
+            text-decoration:none;font-size:0.85rem;font-weight:600;
+            transition:var(--tran);white-space:nowrap;
+        }
+        .github-link:hover { background:#e2e8f0;color:var(--clr-text);transform:translateY(-1px); }
+        .github-link svg { width:18px;height:18px; }
+        .form-section { display:grid; gap:20px; margin-bottom:24px; }
+        .form-group { display:flex; flex-direction:column; gap:6px; }
+        .form-group label { font-weight:600; font-size:0.9rem; color:var(--clr-text); display:flex; align-items:center; gap:6px; }
+        .form-group input, .form-group select {
+            width:100%;padding:11px 14px;
+            border-radius:var(--rad-sm);
+            border:2px solid var(--clr-border);
+            font-size:0.92rem;font-family:inherit;
+            color:var(--clr-text);background:#f8fafc;
+            transition:var(--tran);outline:none;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color:var(--clr-primary);
+            background:#fff;
+            box-shadow:0 0 0 3px rgba(99,102,241,0.1);
+        }
+        .form-group input::placeholder { color:#94a3b8; font-size:0.82rem; }
+        .form-group select {
+            cursor:pointer;appearance:none;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat:no-repeat;background-position:right 14px center;
+            padding-right:36px;
+        }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        .btn-group { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+        .btn {
+            display:inline-flex;align-items:center;justify-content:center;gap:8px;
+            padding:12px 28px;border-radius:var(--rad-sm);
+            font-size:0.95rem;font-weight:600;font-family:inherit;
+            border:none;cursor:pointer;transition:var(--tran);
+            position:relative;overflow:hidden;white-space:nowrap;
+        }
+        .btn::after {
+            content:'';position:absolute;inset:0;
+            background:rgba(255,255,255,0.15);opacity:0;transition:opacity 0.2s;
+        }
+        .btn:hover::after { opacity:1; }
+        .btn:active { transform:scale(0.97); }
+        .btn-primary {
+            background:linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+            color:#fff;box-shadow:0 4px 14px rgba(99,102,241,0.35);
+            flex:1;min-width:180px;
+        }
+        .btn-primary:hover { box-shadow:0 6px 20px rgba(99,102,241,0.45);transform:translateY(-1px); }
+        .btn-secondary { background:#f1f5f9;color:var(--clr-text);flex:1;min-width:160px; }
+        .btn-secondary:hover { background:#e2e8f0; }
+        .btn-success {
+            background:linear-gradient(135deg, var(--clr-success), #059669);
+            color:#fff;box-shadow:0 4px 14px rgba(16,185,129,0.35);
+        }
+        .hint { text-align:center;font-size:0.8rem;color:var(--clr-text-secondary);margin-bottom:8px;line-height:1.7; }
+        .hint a { color:var(--clr-primary);text-decoration:none;font-weight:600;transition:color 0.2s; }
+        .hint a:hover { color:var(--clr-primary-dark);text-decoration:underline; }
+        .hint strong { color:var(--clr-text); }
+        .divider { height:1px;background:var(--clr-border);margin:20px 0; }
+        #results { margin-top:20px; }
+        #results .loading { text-align:center;padding:40px 20px;color:var(--clr-text-secondary); }
+        .spinner {
+            display:inline-block;width:36px;height:36px;
+            border:3px solid var(--clr-border);border-top-color:var(--clr-primary);
+            border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:12px;
+        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        #results .stats-bar {
+            display:flex;align-items:center;justify-content:space-between;
+            padding:10px 16px;background:#f8fafc;border-radius:var(--rad-sm);
+            margin-bottom:16px;font-size:0.85rem;color:var(--clr-text-secondary);
+        }
+        #results .stats-bar strong { color:var(--clr-primary);font-size:1.1rem; }
+        #results .error { text-align:center;padding:30px 20px;color:var(--clr-danger);background:#fef2f2;border-radius:var(--rad-sm);border:1px solid #fecaca; }
+        #results ul { list-style:none;display:grid;gap:10px; }
+        #results li {
+            display:flex;align-items:center;gap:12px;
+            background:#f8fafc;border-radius:var(--rad-sm);
+            padding:14px 16px;border:2px solid transparent;
+            border-left:4px solid var(--clr-primary);
+            cursor:pointer;transition:var(--tran);position:relative;
+        }
+        #results li:hover {
+            border-color:var(--clr-primary);background:#eef2ff;
+            transform:translateX(4px);box-shadow:var(--shadow-md);
+        }
+        #results li .node-name { font-weight:700;font-size:0.95rem;color:var(--clr-text);white-space:nowrap;min-width:60px; }
+        #results li .node-link { flex:1;font-family:'JetBrains Mono','Cascadia Code','Fira Code','Courier New',monospace;font-size:0.78rem;color:var(--clr-text-secondary);word-break:break-all;line-height:1.5; }
+        #results li .copy-badge { position:absolute;right:14px;top:50%;transform:translateY(-50%);background:var(--clr-success);color:#fff;padding:3px 10px;border-radius:12px;font-size:0.72rem;font-weight:600;opacity:0;transition:opacity 0.25s;pointer-events:none; }
+        #results li .copy-badge.show { opacity:1; }
 
-        .copy-all-btn {
-            display: inline-block;
-            width: 50%;
-            padding: 12px;
-            margin: 20px 1%;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .toast {
+            position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-120px);
+            background:#1e293b;color:#fff;padding:12px 24px;border-radius:20px;
+            font-size:0.9rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.25);
+            z-index:1000;display:flex;align-items:center;gap:8px;
+            transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
         }
+        .toast.show { transform:translateX(-50%) translateY(0); }
+        .toast.success { background:#059669; }
+        .toast.error { background:#dc2626; }
 
-        .copy-all-btn:hover {
-            background-color: #45a049;
+        @media (max-width:768px) {
+            body { padding:12px 8px; }
+            .container { padding:24px 16px;border-radius:16px; }
+            .header { flex-direction:column;align-items:flex-start;gap:12px; }
+            .header h1 { font-size:1.3rem; }
+            .form-row { grid-template-columns:1fr; }
+            .btn-group { flex-direction:column; }
+            .btn { width:100%;padding:14px 20px;font-size:1rem; }
+            #results li { flex-direction:column;align-items:flex-start;padding-right:50px; }
+            #results li .node-name { margin-bottom:4px; }
+            #results li .node-link { font-size:0.75rem; }
+            #results .stats-bar { flex-direction:column;gap:4px;text-align:center; }
         }
-
-        .copy-all-btn:active {
-            background-color: #3e8e41;
-        }
-        
-        .generate-btn {
-            background-color: #FF9800;
-        }
-        
-        .generate-btn:hover {
-            background-color: #F57C00;
-        }
-        
-        .generate-btn:active {
-            background-color: #E65100;
-        }
-
-        .copy-all-btn.copied {
-            background-color: #2196F3;
-        }
-        
-        h2 {
-            color: #444;
-            margin: 20px 0;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #FF9800;
-            padding-bottom: 10px;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        li {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #FF9800;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        li a {
-            display: block;
-            font-weight: 600;
-            color: #FF9800;
-            text-decoration: none;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        
-        li a:hover {
-            text-decoration: underline;
-        }
-        
-        .link {
-            display: block;
-            font-size: 0.9rem;
-            color: #666;
-            word-break: break-all;
-            font-family: 'Courier New', monospace;
-        }
-        .preset-link {
-            color: #2196F3;
-            text-decoration: underline;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        .preset-link:hover {
-            color: #1976D2;
-        }
-        
-        .copy-tip {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #4CAF50;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            /* 页面边距 */
-            body {
-                padding: 10px;
-                font-size: 16px;
-                line-height: 1.5;
-            }
-            
-            /* 容器调整 */
-            .container {
-                padding: 15px;
-                margin: 10px auto;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            }
-            
-            /* 按钮调整 */
-            .copy-all-btn {
-                width: 100%;
-                margin: 15px 0;
-                font-size: 18px;
-                padding: 15px;
-            }
-            
-            /* 标题字体大小 */
-            h1 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-            
-            h2 {
-                font-size: 1.2rem;
-            }
-            
-            /* 节点列表项调整 */
-            li {
-                padding: 12px;
-                margin-bottom: 12px;
-            }
-            
-            li a {
-                font-size: 0.9rem;
-            }
-            
-            /* 作者GitHub链接调整 */
-            .container > div:first-child {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-            
-            /* IP来源链接区域调整 */
-            div[style*="margin: 20px 0;"]:nth-last-child(2) {
-                margin: 20px 0;
-            }
-            
-            /* 预设链接文本调整 */
-            .preset-link {
-                font-size: 0.85rem;
-                word-break: break-all;
-            }
-            
-            /* 输入框调整 */
-            input[type="text"] {
-                padding: 12px;
-                font-size: 16px;
-                margin: 15px 0;
-                width: 100%;
-            }
-            
-            /* 节点链接文本调整 */
-            .link {
-                font-size: 0.85rem;
-                line-height: 1.6;
-            }
-            
-            /* 文本行高调整 */
-            p {
-                line-height: 1.5;
-            }
-        }
+        @media (max-width:400px) { .github-link span { display:none; } }
     </style>
 </head>
 <body>
     <div class="container">
-       <div style="position: absolute; top: 10px; right: 10px;">
-        <a href="https://github.com/gslege/CloudflareIP" target="_blank" style="color: #FF9800; text-decoration: none; font-weight: bold;">作者GitHub>></a>
-       </div><br/>
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-icon">&#x26A1;</div>
+                <h1>手搓<span>VLESS</span>节点生成器</h1>
+            </div>
+            <a href="https://github.com/gslege/CloudflareIP" target="_blank" rel="noopener noreferrer" class="github-link">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                <span>作者GitHub</span>
+            </a>
+        </div>
 
-      <h1>手搓VLESS节点生成器</h1>
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="uuidInput">&#x1F511; UUID</label>
+                    <input type="text" id="uuidInput" placeholder="04c808e2-0b59-47b0-a54b-32fc7ef1c902">
+                </div>
+                <div class="form-group">
+                    <label for="custom3Input">&#x1F504; 反代IP</label>
+                    <input type="text" id="custom3Input" placeholder="proxyip.cmliussss.net">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="domainInput">&#x1F310; 部署域名</label>
+                    <input type="text" id="domainInput" placeholder="cf.cloudip.ggff.net">
+                </div>
+                <div class="form-group">
+                    <label for="presetIpSelect">&#x1F4CD; IP来源</label>
+                    <select id="presetIpSelect">
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt">&#x1F3E2; 运营商IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt">&#x1F1F8;&#x1F1EC; 新加坡IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt">&#x1F1EF;&#x1F1F5; 日本IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt">&#x1F1FA;&#x1F1F8; 美国IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/DE.txt">&#x1F1E9;&#x1F1EA; 德国IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/NL.txt">&#x1F1F3;&#x1F1F1; 荷兰IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/country.txt">&#x1F30D; 网络IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cdtools.txt">&#x2B50; 优选IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cfxyz.txt">&#x1F4E1; 测速IP</option>
+                        <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/More.txt">&#x1F4E6; 更多IP</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-      <div style="margin: 20px 0;">
-        <label for="uuidInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">UUID:</label>
-        <input type="text" id="uuidInput" placeholder="04c808e2-0b59-47b0-a54b-32fc7ef1c902" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
-      </div>
+        <div class="btn-group">
+            <button id="generateBtn" class="btn btn-primary">&#x26A1; 一键生成节点</button>
+            <button id="copyAllBtn" class="btn btn-secondary">&#x1F4CB; 一键复制全部</button>
+        </div>
 
-            <div style="margin: 20px 0;">
-        <label for="custom3Input" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">反代IP</label>
-        <input type="text" id="custom3Input" placeholder="proxyip.cmliussss.net" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
-      </div>
-      
-      <div style="margin: 20px 0;">
-        <label for="domainInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">部署域名:</label>
-        <input type="text" id="domainInput" placeholder="cf.cloudip.ggff.net" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
-      </div>
-      
-      <div style="margin: 20px 0; text-align: left;">
-        <label for="ipSourceInput" style="display: block; margin-bottom: 5px; font-weight: 600; text-align: left;">IP来源网址:</label>
-        <input type="text" id="ipSourceInput" placeholder="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd; display: none;">
-        <select id="presetIpSelect" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 8px; border: 1px solid #ddd;">
+        <p class="hint">&#x1F4A1; 输入自己的 <strong>UUID</strong> 和 <strong>部署域名</strong>，或使用默认值，再选择预设IP来源后生成节点</p>
+        <p class="hint">&#x1F527; 公益节点有流量限制，建议使用 <a href="https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js" target="_blank" rel="noopener noreferrer">_worker.js</a> 自己部署！</p>
+        <p class="hint">&#x1F4F1; 一键复制VLESS节点后推荐导入 <strong>v2ray</strong> 或 <strong>karing</strong> 中使用</p>
 
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt">运营商IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/SG.txt">新加坡IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/JP.txt">日本IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/US.txt">美国IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/DE.txt">德国IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/NL.txt">荷兰IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/country.txt">网络IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cdtools.txt">优选IP</option>
-          <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Cfxyz.txt">测速IP</option>
-         <option value="https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/More.txt">更多IP</option>
-
-        </select>
-
-<div style="font-size: 12px;color: #FF9800; text-align: center;">使用方法：输入自己的UUID，部署域名，或使用默认的UUID，部署域名，再选预设IP来源后一键生成节点。</div>
-
-      <div style="text-align: center;"><button id="generateBtn" class="copy-all-btn generate-btn">一键生成节点</button></div>
-
-<div style="font-size: 12px;color: #FF9800; text-align: center;">公益节点有流量限制，建议使用<a href="https://github.com/gslege/CloudflareIP/blob/main/CF-Worker/_worker.js"  target="_blank" style="color: #888888; text-decoration: none; font-weight: bold;">_worker.js</a>自己部署！</div>
-
-<div style="text-align: center;"><button id="copyAllBtn" class="copy-all-btn">一键复制全部</button></div>  
-
-<div style="font-size: 12px;color: #FF9800; text-align: center;">一键复制Vless节点后推荐导入<b>v2ray</b>或<b>karing</b>中使用。</div> 
-
-</div>     
-
-      <div id="results"></div>
+        <div class="divider"></div>
+        <div id="results"></div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <div id="toast" class="toast"></div>
 
-            // 默认UUID、域名和IP来源网址
-            const defaultUUID = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';
-            const defaultDomain = 'cf.cloudip.ggff.net';
-            const defaultCustom3 = 'proxyip.cmliussss.net';
-            const defaultIpSource = 'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt';
-            
-            // 预设IP来源链接点击事件
-            const presetLinks = document.querySelectorAll('.preset-link');
-            presetLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const url = link.href;
-                    const ipSourceInput = document.getElementById('ipSourceInput');
-                    
-                    // 填充到输入框
-                    ipSourceInput.value = url;
-                    
-                    // 复制到剪贴板
-                    navigator.clipboard.writeText(url)
-                        .then(() => {
-                            // 提供视觉反馈
-                            const originalColor = link.style.color;
-                            link.style.color = '#4CAF50';
-                            setTimeout(() => {
-                                link.style.color = originalColor;
-                            }, 1000);
-                        })
-                        .catch(err => {
-                            console.error('复制失败:', err);
-                        });
+    <script>
+    (function() {
+        var defaultUUID = '04c808e2-0b59-47b0-a54b-32fc7ef1c902';
+        var defaultDomain = 'cf.cloudip.ggff.net';
+        var defaultCustom3 = 'proxyip.cmliussss.net';
+        var defaultIpSource = 'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Me.txt';
+
+        var uuidInput, custom3Input, domainInput, presetIpSelect, generateBtn, copyAllBtn, resultsDiv, toast, toastTimer;
+
+        function init() {
+            uuidInput = document.getElementById('uuidInput');
+            custom3Input = document.getElementById('custom3Input');
+            domainInput = document.getElementById('domainInput');
+            presetIpSelect = document.getElementById('presetIpSelect');
+            generateBtn = document.getElementById('generateBtn');
+            copyAllBtn = document.getElementById('copyAllBtn');
+            resultsDiv = document.getElementById('results');
+            toast = document.getElementById('toast');
+
+            generateBtn.addEventListener('click', onGenerate);
+            copyAllBtn.addEventListener('click', onCopyAll);
+
+            [uuidInput, custom3Input, domainInput].forEach(function(el) {
+                el.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); generateBtn.click(); }
                 });
             });
 
-            // 预设IP来源下拉菜单事件
-            const presetIpSelect = document.getElementById('presetIpSelect');
-            presetIpSelect.addEventListener('change', () => {
-                const selectedUrl = presetIpSelect.value;
-                const ipSourceInput = document.getElementById('ipSourceInput');
-                
-                // 填充到输入框
-                if (selectedUrl) {
-                    ipSourceInput.value = selectedUrl;
-                    
-                    // 复制到剪贴板
-                    navigator.clipboard.writeText(selectedUrl)
-                        .then(() => {
-                            // 提供视觉反馈
-                            const originalColor = presetIpSelect.style.color;
-                            presetIpSelect.style.color = '#4CAF50';
-                            setTimeout(() => {
-                                presetIpSelect.style.color = originalColor;
-                            }, 1000);
-                        })
-                        .catch(err => {
-                            console.error('复制失败:', err);
-                        });
-                }
-            });
+            generateLinks(defaultUUID, defaultDomain, defaultIpSource, defaultCustom3);
+        }
 
-            // 生成链接函数
-            async function generateLinks(uuid = defaultUUID, domain = defaultDomain, ipSource = defaultIpSource, custom3 = defaultCustom3) {
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.innerHTML = '<p>正在获取内容并生成链接，请稍候...</p>';
+        function showToast(message, type) {
+            type = type || 'success';
+            clearTimeout(toastTimer);
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2000);
+        }
 
+        function copyToClipboard(text) {
+            return new Promise(function(resolve) {
                 try {
-                    const url = ipSource;
-                    const response = await fetch(url);
-                    const content = await response.text();
-
-                    // 解析每一行IP#名称
-                    const lines = content.split('\n').filter(line => line.trim());
-                    
-                    if (lines.length === 0) {
-                        resultsDiv.innerHTML = '<p>未找到任何IP和名称</p>';
-                        return;
-                    }
-
-                    // VLESS链接模板
-                    const vlessTemplate = `vless://${uuid}@自定义1:443?encryption=none&security=tls&sni=${domain}&fp=random&insecure=0&allowInsecure=0&type=ws&host=${domain}&path=pyip%3D${custom3}#自定义2`;
-
-                    // 生成VLESS链接
-                    const links = [];
-                    
-                    lines.forEach((line, index) => {
-                        // 分离IP和名称
-                        const [ip, name = `服务器${index + 1}`] = line.trim().split('#');
-                        
-                        // 验证IP格式
-                        const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
-                        if (!ipRegex.test(ip)) return;
-                        
-                        const vlessLink = vlessTemplate.replace('自定义1', ip).replace('自定义2', name).replace('自定义3', custom3);
-                        links.push(`<li>${name}<span class="link">${vlessLink}</span><span class="copy-tip">已复制</span></li>`);
-                    });
-                    
-                    const linksHTML = links.join('');
-
-                    resultsDiv.innerHTML = `
-                        <ul style="list-style-type: none; padding: 0; text-align: left;">${linksHTML}</ul>
-                        <p>共生成 ${links.length} 个链接</p>
-                    `;
-
-                    // 为每个节点添加点击复制功能
-                    const listItems = document.querySelectorAll('#results li');
-                    listItems.forEach(item => {
-                        item.addEventListener('click', async () => {
-                            const linkSpan = item.querySelector('.link');
-                            const copyTip = item.querySelector('.copy-tip');
-                            if (!linkSpan) return;
-                            
-                            const linkText = linkSpan.textContent;
-                            try {
-                                await navigator.clipboard.writeText(linkText);
-                                // 提供视觉反馈
-                                const originalBg = item.style.backgroundColor;
-                                item.style.backgroundColor = '#e8f5e9';
-                                
-                                // 显示已复制提示
-                                if (copyTip) {
-                                    copyTip.style.opacity = '1';
-                                }
-                                
-                                // 1秒后恢复原背景色和隐藏提示
-                                setTimeout(() => {
-                                    item.style.backgroundColor = originalBg || '';
-                                    if (copyTip) {
-                                        copyTip.style.opacity = '0';
-                                    }
-                                }, 1000);
-                            } catch (err) {
-                                console.error('复制失败:', err);
-                                alert('复制失败，请重试');
-                            }
-                        });
-                    });
-                } catch (error) {
-                    resultsDiv.innerHTML = `<p>生成失败: ${error.message}</p>`;
+                    navigator.clipboard.writeText(text).then(function() { resolve(true); }, fallback);
+                } catch (e) { fallback(); }
+                function fallback() {
+                    var ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.cssText = 'position:fixed;opacity:0;';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); resolve(true); } catch (ex) { resolve(false); }
+                    document.body.removeChild(ta);
                 }
-            }
-
-            // 页面加载时使用默认值生成链接
-            generateLinks();
-
-            // 一键生成按钮事件
-            document.getElementById('generateBtn').addEventListener('click', () => {
-                const uuid = document.getElementById('uuidInput').value || defaultUUID;
-                const domain = document.getElementById('domainInput').value || defaultDomain;
-                const ipSource = document.getElementById('ipSourceInput').value || defaultIpSource;
-                const custom3 = document.getElementById('custom3Input').value || defaultCustom3;
-                generateLinks(uuid, domain, ipSource, custom3);
             });
+        }
 
-            // 一键复制全部链接功能
-            document.getElementById('copyAllBtn').addEventListener('click', async () => {
-                const links = document.querySelectorAll('.link');
-                if (links.length === 0) {
-                    alert('没有可复制的链接');
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function generateLinks(uuid, domain, ipSource, custom3) {
+            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>正在获取IP列表并生成节点，请稍候…</p></div>';
+
+            fetch(ipSource).then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + res.statusText);
+                return res.text();
+            }).then(function(content) {
+                var lines = content.split('\n').filter(function(l) { return l.trim(); });
+                if (!lines.length) {
+                    resultsDiv.innerHTML = '<div class="error">&#x26A0;&#xFE0F; 未找到任何IP数据，请检查IP来源</div>';
                     return;
                 }
 
-                const text = Array.from(links).map(link => link.textContent).join('\n');
-                try {
-                    await navigator.clipboard.writeText(text);
-                    const btn = document.getElementById('copyAllBtn');
-                    const originalText = btn.textContent;
-                    btn.textContent = '已复制';
-                    btn.classList.add('copied');
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.classList.remove('copied');
-                    }, 1500);
-                } catch (err) {
-                    console.error('复制失败:', err);
-                    alert('复制失败，请重试');
-                }
+                var ipRe = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+                var tpl = 'vless://' + uuid + '@__IP__:443?encryption=none&security=tls&sni=' + domain +
+                    '&fp=random&insecure=0&allowInsecure=0&type=ws&host=' + domain +
+                    '&path=pyip%3D' + custom3 + '#__NAME__';
+                var links = [];
+
+                lines.forEach(function(line, idx) {
+                    var parts = line.trim().split('#');
+                    var ip = parts[0];
+                    var name = parts[1] || '节点' + (idx + 1);
+                    if (!ipRe.test(ip)) return;
+                    links.push({
+                        name: name,
+                        link: tpl.replace('__IP__', ip).replace('__NAME__', name)
+                    });
+                });
+
+                var html = '<div class="stats-bar"><span>&#x1F4CA; 共生成 <strong>' + links.length + '</strong> 个节点</span><span>&#x1F517; 点击任意节点即可复制</span></div><ul>';
+                links.forEach(function(item, i) {
+                    html += '<li data-link="' + escapeHtml(item.link) + '" data-idx="' + i + '">';
+                    html += '<span class="node-name">' + escapeHtml(item.name) + '</span>';
+                    html += '<span class="node-link">' + escapeHtml(item.link) + '</span>';
+                    html += '<span class="copy-badge">&#x2705; 已复制</span></li>';
+                });
+                html += '</ul>';
+                resultsDiv.innerHTML = html;
+
+                resultsDiv.querySelectorAll('li').forEach(function(li) {
+                    li.addEventListener('click', function() {
+                        var link = li.dataset.link;
+                        var badge = li.querySelector('.copy-badge');
+                        copyToClipboard(link).then(function(ok) {
+                            if (ok) {
+                                badge.classList.add('show');
+                                li.style.backgroundColor = '#d1fae5';
+                                setTimeout(function() {
+                                    badge.classList.remove('show');
+                                    li.style.backgroundColor = '';
+                                }, 1200);
+                            } else {
+                                showToast('&#x274C; 复制失败，请手动复制', 'error');
+                            }
+                        });
+                    });
+                });
+            }).catch(function(err) {
+                resultsDiv.innerHTML = '<div class="error"><p>&#x274C; 生成失败</p><p style="font-size:0.85rem;margin-top:6px;">' + escapeHtml(err.message) + '</p></div>';
             });
-        });
+        }
+
+        function onGenerate() {
+            generateLinks(
+                uuidInput.value.trim() || defaultUUID,
+                domainInput.value.trim() || defaultDomain,
+                presetIpSelect.value || defaultIpSource,
+                custom3Input.value.trim() || defaultCustom3
+            );
+        }
+
+        function onCopyAll() {
+            var els = resultsDiv.querySelectorAll('li[data-link]');
+            if (!els.length) { showToast('&#x26A0;&#xFE0F; 请先生成节点', 'error'); return; }
+            var text = Array.from(els).map(function(el) { return el.dataset.link; }).join('\n');
+            copyToClipboard(text).then(function(ok) {
+                if (ok) {
+                    var orig = copyAllBtn.innerHTML;
+                    copyAllBtn.innerHTML = '&#x2705; 已复制全部';
+                    copyAllBtn.className = 'btn btn-success';
+                    showToast('&#x2705; 已复制 ' + els.length + ' 个节点到剪贴板');
+                    setTimeout(function() {
+                        copyAllBtn.innerHTML = orig;
+                        copyAllBtn.className = 'btn btn-secondary';
+                    }, 2000);
+                } else { showToast('&#x274C; 复制失败，请重试', 'error'); }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+    })();
     </script>
 </body>
 </html>
